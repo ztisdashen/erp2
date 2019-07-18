@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-3.4.0.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btn").click(function () {
+                $(".ee").each(function () {
+                    $(this).prop("value","")
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<input type="button" id="btn">
+<input type="text" class="ee">
+<input type="text" class="ee">
+<input type="text" class="ee">
+</body>
+</html>
