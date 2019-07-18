@@ -52,6 +52,22 @@ http://www.springframework.org/schema/context
         <property name="mappingResources">
             <list>
                 <value>Dep.hbm.xml</value>
+                <value>Emp.hbm.xml</value>
+                <value>EmpRole.hbm.xml</value>
+                <value>Goods.hbm.xml</value>
+                <value>Goodstype.hbm.xml</value>
+                <value>Inventory.hbm.xml</value>
+                <value>Menu.hbm.xml</value>
+                <value>Orderdetail.hbm.xml</value>
+                <value>Orders.hbm.xml</value>
+                <value>Returnorderdetail.hbm.xml</value>
+                <value>Returnorders.hbm.xml</value>
+                <value>Role.hbm.xml</value>
+                <value>RoleMenu.hbm.xml</value>
+                <value>Store.hbm.xml</value>
+                <value>Storedetail.hbm.xml</value>
+                <value>Storeoper.hbm.xml</value>
+                <value>Supplier.hbm.xml</value>
             </list>
         </property>
     </bean>

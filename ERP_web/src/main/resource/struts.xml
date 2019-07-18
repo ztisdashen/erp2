@@ -9,7 +9,38 @@
     <package name="maven" extends="struts-default" namespace="/">
         <global-allowed-methods>regex:.*</global-allowed-methods>
         <action name="dep_*" class="depAction" method="{1}">
-<!--            <result name="success">/dep.jsp</result>-->
         </action>
+        <action name="emp_*" class="empAction" method="{1}">
+        </action>
+        <action name="store_*" class="storeAction" method="{1}">
+        </action>
+        <action name="storeoper_*" class="storeoperAction" method="{1}">
+        </action>
+        <action name="storeDetail_*" class="storeDetailAction" method="{1}">
+        </action>
+        <action name="supplier_*" class="supplierAction" method="{1}">
+        </action>
+        <action name="orderDetail_*" class="orderDetailAction" method="{1}">
+        </action>
+        <action name="orders_*" class="ordersAction" method="{1}">
+        </action>
+        <action name="returnOrderDetail_*" class="returnOrderDetailAction" method="{1}">
+        </action>
+        <action name="returnOrders_*" class="returnOrdersAction" method="{1}">
+        </action>
+        <action name="menu_*" class="menuAction" method="{1}">
+        </action>
+        <action name="role_*" class="roleAction" method="{1}">
+        </action>
+        <action name="roleMenu_*" class="roleMenuAction" method="{1}">
+        </action>
+        <action name="inventory_*" class="inventoryAction" method="{1}">
+        </action>
+        <action name="goods_*" class="goodsAction" method="{1}">
+        </action>
+        <action name="goodstype_*" class="goodstypeAction" method="{1}">
+        </action>
+
+
     </package>
 </struts>

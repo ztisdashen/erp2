@@ -17,4 +17,53 @@ http://www.springframework.org/schema/context
     <bean class="com.dao.impl.DepDaoImpl" id="depDao">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <bean class="com.dao.impl.EmpDaoImpl" id="empDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.EmpRoleDaoImpl" id="empRoleDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.StoredetailDaoImpl" id="storedetailDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.GoodsDaoImpl" id="goodsDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.GoodstypeDaoImpl" id="goodstypeDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.SupplierDaoImpl" id="supplierDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.StoreoperDaoImpl" id="storeoperDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.StoreDaoImpl" id="storeDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.RoleMenuDaoImpl" id="roleMenuDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.RoleDaoImpl" id="roleDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.ReturnirdersDaoImpl" id="returnirdersDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.ReturnderdetailDaoImpl" id="returnderdetailDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.OrdersDaoImpl" id="ordersDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.OrderdetailDaoImpl" id="orderdetailDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.MenuDaoImpl" id="menuDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean class="com.dao.impl.InventoryDaoImpl" id="inventoryDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
 </beans>

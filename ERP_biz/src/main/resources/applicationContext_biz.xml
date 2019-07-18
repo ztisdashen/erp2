@@ -17,6 +17,63 @@ http://www.springframework.org/schema/context
     <bean class="com.biz.impl.DepBizImpl" id="depBiz">
         <property name="dao" ref="depDao"/>
     </bean>
+    <bean class="com.biz.impl.SupplierBizImpl" id="supplierBiz">
+        <property name="baseDao" ref="supplierDao"></property>
+    </bean>
+    <bean class="com.biz.impl.StoreoperBizImpl" id="storeoperBiz">
+        <property name="baseDao" ref="storeoperDao"/>
+    </bean>
+    <bean class="com.biz.impl.StoredetailBizImpl" id="storedetailBiz">
+        <property name="baseDao" ref="storedetailDao"/>
+    </bean>
+    <bean class="com.biz.impl.StoreBizImpl" id="storeBiz">
+        <property name="baseDao" ref="storeDao"/>
+    </bean>
 
+    <bean class="com.biz.impl.RoleMenuBizImpl" id="roleMenuBiz">
+        <property name="baseDao" ref="roleMenuDao"/>
+    </bean>
 
+    <bean class="com.biz.impl.RoleBizImpl" id="roleBiz">
+        <property name="baseDao" ref="roleDao"/>
+    </bean>
+
+    <bean class="com.biz.impl.ReturnOrderDetailBizImpl" id="returnOrderDetailBiz">
+        <property name="baseDao" ref="returnderdetailDao"/>
+    </bean>
+
+    <bean class="com.biz.impl.ReturnorderBizImpl" id="returnorderBiz">
+        <property name="baseDao" ref="returnirdersDao"/>
+    </bean>
+
+    <bean class="com.biz.impl.OrdersBizImpl" id="ordersBiz">
+        <property name="baseDao" ref="ordersDao"/>
+    </bean>
+
+    <bean class="com.biz.impl.OrderdetailBizImpl" id="orderdetailBiz">
+        <property name="baseDao" ref="orderdetailDao"/>
+    </bean>
+
+    <bean class="com.biz.impl.MenuBizImpl" id="menuBiz">
+        <property name="baseDao" ref="menuDao"/>
+    </bean>
+
+    <bean class="com.biz.impl.InventoryBizImpl" id="inventoryBiz">
+        <property name="baseDao" ref="inventoryDao"/>
+    </bean>
+
+    <bean class="com.biz.impl.GoodstypeBizImpl" id="goodstypeBiz">
+        <property name="baseDao" ref="goodstypeDao"/>
+    </bean>
+
+    <bean class="com.biz.impl.GoodsBizImpl" id="goodsBiz">
+        <property name="baseDao" ref="goodsDao"/>
+    </bean>
+
+    <bean class="com.biz.impl.EmpRoleBizImpl" id="empRoleBiz">
+        <property name="baseDao" ref="empRoleDao"/>
+    </bean>
+    <bean class="com.biz.impl.EmpBizImpl" id="empBiz">
+        <property name="baseDao" ref="empDao"/>
+    </bean>
 </beans>

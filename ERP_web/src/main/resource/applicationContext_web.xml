@@ -14,7 +14,57 @@
 http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd">
     <import resource="classpath*:applicationContext_biz.xml"/>
-    <bean class="web.action.DepAction" id="depAction" scope="prototype">
+    <bean class="com.web.action.DepAction" id="depAction" scope="prototype">
         <property name="depBiz" ref="depBiz"/>
     </bean>
+    <bean class="com.web.action.SupplierAction" id="supplierAction" scope="prototype">
+        <property name="supplierBiz" ref="supplierBiz"/>
+    </bean>
+    <bean class="com.web.action.StoreoperAction" id="storeoperAction" scope="prototype">
+        <property name="storeoperBiz" ref="storeoperBiz"/>
+    </bean>
+    <bean class="com.web.action.StoreDetailAction" id="storeDetailAction" scope="prototype">
+        <property name="storedetailBiz" ref="storedetailBiz"/>
+    </bean>
+    <bean class="com.web.action.StoreAction" id="storeAction" scope="prototype">
+        <property name="storeBiz" ref="storeBiz"/>
+    </bean>
+    <bean class="com.web.action.RoleMenuAction" id="roleMenuAction" scope="prototype">
+        <property name="roleMenuBiz" ref="roleMenuBiz"/>
+    </bean>
+    <bean class="com.web.action.RoleAction" id="roleAction" scope="prototype">
+        <property name="roleBiz" ref="roleBiz"/>
+    </bean>
+    <bean class="com.web.action.ReturnOrdersAction" id="returnOrdersAction" scope="prototype">
+        <property name="returnorderBiz" ref="returnorderBiz"/>
+    </bean>
+    <bean class="com.web.action.ReturnOrderDetailAction" id="returnOrderDetailAction" scope="prototype">
+        <property name="returnOrderDetailBiz" ref="returnOrderDetailBiz"/>
+    </bean>
+    <bean class="com.web.action.OrdersAction" id="ordersAction" scope="prototype">
+        <property name="ordersBiz" ref="ordersBiz"/>
+    </bean>
+    <bean class="com.web.action.OrderDetailAction" id="orderDetailAction" scope="prototype">
+        <property name="orderdetailBiz" ref="orderdetailBiz"/>
+    </bean>
+    <bean class="com.web.action.MenuAction" id="menuAction" scope="prototype">
+        <property name="menuBiz" ref="menuBiz"/>
+    </bean>
+    <bean class="com.web.action.InventoryAction" id="inventoryAction" scope="prototype">
+        <property name="inventoryBiz" ref="inventoryBiz"/>
+    </bean>
+    <bean class="com.web.action.GoodstypeAction" id="goodstypeAction" scope="prototype">
+        <property name="goodstypeBiz" ref="goodstypeBiz"/>
+    </bean>
+    <bean class="com.web.action.GoodsAction" id="goodsAction" scope="prototype">
+        <property name="goodsBiz" ref="goodsBiz"/>
+    </bean>
+    <bean class="com.web.action.EmpRoleAction" id="empRoleAction" scope="prototype">
+        <property name="empRoleBiz" ref="empRoleBiz"/>
+    </bean>
+    <bean class="com.web.action.EmpAction" id="empAction" scope="prototype">
+        <property name="empBiz" ref="empBiz"/>
+    </bean>
+
+
 </beans>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.entity.Supplier" table="SUPPLIER" schema="ERP">
+        <id name="uuid" column="UUID"/>
+        <property name="name" column="NAME"/>
+        <property name="address" column="ADDRESS"/>
+        <property name="contact" column="CONTACT"/>
+        <property name="tele" column="TELE"/>
+        <property name="email" column="EMAIL"/>
+        <property name="type" column="TYPE"/>
+    </class>
+</hibernate-mapping>
