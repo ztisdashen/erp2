@@ -61,20 +61,26 @@ function edit(uuid) {
 
 
 function edit2(s1,s2) {
-    $("#form"+s1).form("submit",{
-        url:actionName+'_'+s2+".action",
-        success:function (data) {
-            var data2 = eval('(' + data + ')'); // change the JSON string to javascript object
-            $.messager.show({
-                title:'提示',
-                msg:data2.msg,
-                timeout:2000,
-                showType:'slide'
-            });
-            $("#win"+s1).window('close');
-            $("#dg").datagrid('reload');
-            //清楚form中的数据
-            $("#form"+s1).form("clear");
-        }
-    })
+    var b = $("#form"+s1).form("validate");
+    if(!b)
+        return;
+    else {
+        $("#form"+s1).form("submit",{
+            url:actionName+'_'+s2+".action",
+            success:function (data) {
+                var data2 = eval('(' + data + ')'); // change the JSON string to javascript object
+                $.messager.show({
+                    title:'提示',
+                    msg:data2.msg,
+                    timeout:2000,
+                    showType:'slide'
+                });
+                $("#win"+s1).window('close');
+                $("#dg").datagrid('reload');
+                //清楚form中的数据
+                $("#form"+s1).form("clear");
+            }
+        })
+    }
+
 }

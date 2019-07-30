@@ -1,6 +1,8 @@
 package com.web.action;
 
+import com.alibaba.fastjson.JSON;
 import com.biz.IMenuBiz;
+import com.entity.Menu;
 import com.entity.Menu;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -11,24 +13,18 @@ import com.opensymphony.xwork2.ModelDriven;
  * @author: zt648
  * @create: 2019-07-18 20:11
  **/
-public class MenuAction extends ActionSupport implements ModelDriven<Menu> {
+public class MenuAction extends BaseAction<Menu> implements ModelDriven<Menu> {
     private Menu menu = new Menu();
     @Override
     public Menu getModel() {
+        setT(menu);
         return menu;
     }
     private IMenuBiz menuBiz;
 
     public void setMenuBiz(IMenuBiz menuBiz) {
+        setBaseBiz(menuBiz);
         this.menuBiz = menuBiz;
     }
-    private Integer page;
-    private Integer rows;
-    public void setPage(Integer page) {
-        this.page = page;
-    }
 
-    public void setRows(Integer rows) {
-        this.rows = rows;
-    }
 }

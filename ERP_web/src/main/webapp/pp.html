@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script type="text/javascript" src="js/jquery-3.4.0.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $("#btn").click(function () {
-                $(".ee").each(function () {
-                    $(this).prop("value","")
-                })
-            })
-        })
-    </script>
+    <link rel="stylesheet" type="text/css" href="./themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./themes/icon.css">
+    <script type="text/javascript" src="./js/jquery-3.4.0.js"></script>
+    <script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <script type="text/javascript" src="./locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="js/jquery.serializejson.js"></script>
 </head>
 <body>
-<input type="button" id="btn">
-<input type="text" class="ee">
-<input type="text" class="ee">
-<input type="text" class="ee">
+<form id="ff">
+
+        <input class="easyui-radiobutton" name="fruit" value="Apple" label="Apple:">
+
+
+        <input class="easyui-radiobutton" name="fruit" value="Orange" label="Orange:">
+
+        <input class="easyui-radiobutton" name="fruit" value="Banana" label="Banana:">
+
+</form>
 </body>
 </html>

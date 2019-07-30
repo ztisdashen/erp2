@@ -1,4 +1,4 @@
-package com;
+package com.biz;
 
 import com.entity.Dep;
 import org.hibernate.criterion.DetachedCriteria;

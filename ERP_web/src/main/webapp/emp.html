@@ -1,0 +1,244 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="./themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./themes/icon.css">
+    <script type="text/javascript" src="./js/jquery-3.4.0.js"></script>
+    <script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <script type="text/javascript" src="./locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="js/jquery.serializejson.js"></script>
+    <script type="text/javascript" src="js/crud.js"></script>
+    <script type="text/javascript" src="js/date.js"></script>
+    <script type="text/javascript">
+        var actionName = "emp";
+        var columns =  [[
+            {field: 'uuid', title: '部门编号', width: 100},
+            {field: 'username', title: '登录名', width: 100},
+            {field: 'name', title: '用户性名', width: 100},
+            {field: 'gender', title: '性别', width: 100,formatter:function (value, row, index) {
+                    if(1 == value * 1){
+                        return "男"
+                    }else
+                        return "女"
+                }},
+            {field: 'email', title: '邮箱', width: 150},
+            {field: 'tele', title: '电话', width: 100},
+            {field: 'address', title: '地址', width: 200},
+            {field: 'birthday', title: '生日', width: 100,formatter:function (value) {
+                    return new Date(value).Format("yyyy-MM-dd");
+                }},
+            {field: 'dep', title: '部门名称', width: 100,formatter:function (value) {
+                    return value.name;
+                }},
+            {field:'ssss',title:'操作',formatter:function (value,row,index) {
+                    var del = '<a href="javascript:void(0)" class="menuA" onclick="del('+row.uuid+')">删除</a>|';
+                    var edit='<a href="javascript:void(0)" onclick="edit('+row.uuid+')" class="menuA">修改</a>';
+                    return del+edit;
+                },width:150}
+        ]];
+    </script>
+</head>
+<body class="font">
+<div class="easyui-panel" style="padding-left: 4px;border-bottom: none">
+    <form id="searchForm">
+        <table >
+            <tr>
+                <td>
+                    登录名：<input class="put22 easyui-textbox"  style="width:150px"
+                                name="username"> &nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    员工密码：<input class="put22 easyui-textbox"  style="width:150px"
+                                name="pwd">&nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    性别：
+                    <input class="easyui-radiobutton" name="gender" value="">全部
+                    <input class="easyui-radiobutton" name="gender" value="1">男
+                    <input class="easyui-radiobutton" name="gender" value="2">女
+                </td>
+                <td>
+                    真实姓名：<input class="put22 easyui-textbox"  style="width:150px"
+                                name="name">&nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    邮件：<input class="put22 easyui-textbox"  style="width:150px"
+                              name="email"> &nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    电话：&nbsp;&nbsp;<input class="put22 easyui-textbox"  style="width:150px"
+                                name="tele">&nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    地址：&nbsp;&nbsp;&nbsp;&nbsp;<input class="put22 easyui-textbox"  style="width:150px"
+                              name="address"> &nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    部门：<input  class="easyui-combobox" name="dep.uuid"
+                                 data-options="valueField:'uuid',textField:'name',url:'dep_listAll.action'">
+                </td>
+                <td>
+                生日：&nbsp;&nbsp;&nbsp;&nbsp;<input class="put22 easyui-textbox"  style="width:150px"
+                              name="birthday"> &nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<table id="dg" style="width: 100%">
+
+</table>
+
+<!-- 添加客户的表单，默认是隐藏的 -->
+<div id="winSave" class="easyui-window" title="添加客户" style="width:550px;height:300px"
+     data-options="iconCls:'icon-save',modal:true,closed:true">
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'center'" style="padding:10px;border-bottom: none">
+            <form id="formSave" method="post">
+                <TABLE cellSpacing=0 cellPadding=5  border=0>
+                    <TR>
+                        <td>登录名：</td>
+                        <td>
+                            <INPUT class="textbox easyui-validatebox"
+                                   data-options="required:true,missingMessage:'登录名不能为空'"
+                                   style="WIDTH: 150px" maxLength=50 name="username">
+                        </td>
+                        <td>性别：</td>
+                        <td>
+                            <input name="gender" type="radio" value="1">男
+                            <input name="gender" type="radio" value="2">女
+                        </td>
+                    </TR>
+                    <tr>
+                        <td>员工密码：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="pwd">
+                        </td>
+                        <td>部门编号：</td>
+                        <td>
+                            <input  class="easyui-combobox" name="dep.uuid"
+                                   data-options="valueField:'uuid',textField:'name',url:'dep_listAll.action'">
+                        </td>
+                    </TR>
+
+                    <TR>
+                        <td>员工名：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="name">
+                        </td>
+                        <td>邮件：</td>
+                        <td>
+                            <INPUT class="textbox easyui-validatebox"
+                                   data-options="required:true,validType:'email',invalidMessage:'邮件格式不正确'"
+                                   style="WIDTH: 150px" maxLength=50 name="email">
+                        </td>
+                    </TR>
+                    <TR>
+                        <td>电话：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="tele">
+                        </td>
+                        <td>地址：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="address">
+                        </td>
+                    </TR>
+                    <TR>
+
+                        <td>生日：</td>
+                        <td>
+                            <INPUT class="textbox easyui-datebox" editable="false" style="WIDTH: 150px" maxLength=50 name="birthday">
+                        </td>
+                    </TR>
+                </TABLE>
+            </form>
+        </div>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="edit2('Save','save')" style="width:80px">保存</a>
+        </div>
+    </div>
+</div>
+<div id="winEdit" class="easyui-window" title="修改客户" style="width:550px;height:300px"
+     data-options="iconCls:'icon-save',modal:true,closed:true">
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'center'" style="padding:10px;border-bottom: none">
+            <form id="formEdit" method="post">
+                <TABLE cellSpacing=0 cellPadding=5  border=0>
+                    <TR>
+                        <td>员工姓名：</td>
+                        <td>
+                            <INPUT class="textboxeasyui-validatebox"
+                                   data-options="required:true,missingMessage:'登录名不能为空'"
+                                   style="WIDTH: 150px" maxLength=50 name="username">
+                        </td>
+                        <td>性别：</td>
+                        <td>
+                            <input name="gender" type="radio" value="1">男
+                            <input name="gender" type="radio" value="2">女
+                        </td>
+                    </TR>
+                    <tr>
+                        <td>员工密码：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="pwd">
+                        </td>
+                        <td>部门编号：</td>
+                        <td>
+                            <input id="cc" class="easyui-combobox" name="dep.uuid"
+                                   data-options="valueField:'uuid',textField:'name',url:'dep_listAll.action'">
+                        </td>
+                    </TR>
+
+                    <TR>
+                        <td>用户名2：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="name">
+                        </td>
+                        <td>邮件：</td>
+                        <td>
+                            <INPUT class="textboxeasyui-validatebox"
+                                   data-options="required:true,validType:'email',invalidMessage:'邮件格式不正确'"
+                                   style="WIDTH: 150px" maxLength=50 name="email">
+                        </td>
+                    </TR>
+                    <TR>
+                        <td>电话：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="tele">
+                        </td>
+                        <td>地址：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="address">
+                        </td>
+                    </TR>
+                    <TR>
+
+                        <td>生日：</td>
+                        <td>
+                            <INPUT class="textbox easyui-datebox"  style="WIDTH: 150px" editable="false" maxLength=50 name="birthday">
+                        </td>
+                    </TR>
+                </TABLE>
+            </form>
+        </div>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="edit2('Edit','editFinal')" style="width:80px">修改</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

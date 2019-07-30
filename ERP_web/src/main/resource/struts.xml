@@ -40,7 +40,9 @@
         </action>
         <action name="goodstype_*" class="goodstypeAction" method="{1}">
         </action>
+        <action name="empRole" class="empRoleAction" method="{1}">
 
+        </action>
 
     </package>
 </struts>

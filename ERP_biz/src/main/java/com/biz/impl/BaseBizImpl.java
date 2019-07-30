@@ -1,6 +1,6 @@
 package com.biz.impl;
 
-import com.Utils;
+import com.biz.Utils;
 import com.biz.IBaseBiz;
 import com.dao.IBaseDao;
 import com.entity.Page;
@@ -64,5 +64,10 @@ public class BaseBizImpl<T> implements IBaseBiz<T>, Serializable {
     @Override
     public void edit(T t) {
         baseDao.edit(t);
+    }
+
+    @Override
+    public List<T> findAll() {
+        return baseDao.findAll();
     }
 }

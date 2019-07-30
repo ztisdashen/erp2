@@ -1,8 +1,9 @@
 package com.web.action;
 
+import com.alibaba.fastjson.JSON;
 import com.biz.IOrdersBiz;
+
 import com.entity.Orders;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 /**
@@ -11,24 +12,40 @@ import com.opensymphony.xwork2.ModelDriven;
  * @author: zt648
  * @create: 2019-07-18 20:11
  **/
-public class OrdersAction extends ActionSupport implements ModelDriven<Orders> {
+public class OrdersAction extends BaseAction<Orders> implements ModelDriven<Orders> {
     private Orders orders = new Orders();
     @Override
     public Orders getModel() {
+        setT(orders);
         return orders;
     }
     private IOrdersBiz ordersBiz;
 
     public void setOrdersBiz(IOrdersBiz ordersBiz) {
+        setBaseBiz(ordersBiz);
         this.ordersBiz = ordersBiz;
     }
-    private Integer page;
-    private Integer rows;
-    public void setPage(Integer page) {
-        this.page = page;
+    public String delete() {
+        try {
+            Orders t1 = ordersBiz.findById(orders.getUuid());
+            ordersBiz.delete(t1);
+            ajaxReturn("msg", "删除成功");
+        } catch (Exception e) {
+            ajaxReturn("msg", "删除失败");
+        }
+        return NONE;
+
     }
 
-    public void setRows(Integer rows) {
-        this.rows = rows;
+    /**
+     * 回显数据
+     *
+     * @return
+     */
+    public String edit() {
+        Orders byId = ordersBiz.findById(orders.getUuid());
+        String jsonString = JSON.toJSONString(byId);
+        respone(jsonString);
+        return NONE;
     }
 }

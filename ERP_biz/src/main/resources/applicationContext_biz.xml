@@ -74,6 +74,6 @@ http://www.springframework.org/schema/context
         <property name="baseDao" ref="empRoleDao"/>
     </bean>
     <bean class="com.biz.impl.EmpBizImpl" id="empBiz">
-        <property name="baseDao" ref="empDao"/>
+        <property name="empDao" ref="empDao"/>
     </bean>
 </beans>

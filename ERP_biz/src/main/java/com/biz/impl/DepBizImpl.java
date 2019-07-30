@@ -1,15 +1,8 @@
 package com.biz.impl;
 
-import com.Utils;
 import com.biz.IDepBiz;
 import com.dao.IDepDao;
-import com.dao.impl.BaseDaoImpl;
 import com.entity.Dep;
-import com.entity.Page;
-import org.hibernate.criterion.DetachedCriteria;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 
 /**
  * 部门业务的实现
@@ -27,6 +20,4 @@ public class DepBizImpl extends BaseBizImpl<Dep> implements IDepBiz {
         super.setBaseDao(dao);
         this.dao = dao;
     }
-
-
 }

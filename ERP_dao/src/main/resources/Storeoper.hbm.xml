@@ -5,7 +5,12 @@
 <hibernate-mapping>
 
     <class name="com.entity.Storeoper" table="STOREOPER" schema="ERP">
-        <id name="uuid" column="UUID"/>
+        <id name="uuid" column="UUID">
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
+                <!--                我们设立的主键生成器   -->
+                <param name="sequence_name">STOREOPER_seq</param>
+            </generator>
+        </id>
         <property name="empuuid" column="EMPUUID"/>
         <property name="opertime" column="OPERTIME"/>
         <property name="storeuuid" column="STOREUUID"/>

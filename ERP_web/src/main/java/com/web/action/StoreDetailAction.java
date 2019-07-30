@@ -1,6 +1,8 @@
 package com.web.action;
 
+import com.alibaba.fastjson.JSON;
 import com.biz.IStoredetailBiz;
+import com.entity.Storedetail;
 import com.entity.Storedetail;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -11,24 +13,40 @@ import com.opensymphony.xwork2.ModelDriven;
  * @author: zt648
  * @create: 2019-07-18 20:13
  **/
-public class StoreDetailAction extends ActionSupport implements ModelDriven<Storedetail> {
-    private Storedetail storedetail = new Storedetail();
+public class StoreDetailAction extends BaseAction<Storedetail> implements ModelDriven<Storedetail> {
+    private Storedetail Storedetail = new Storedetail();
     @Override
     public Storedetail getModel() {
-        return storedetail;
+        setT(Storedetail);
+        return Storedetail;
     }
-    private IStoredetailBiz storedetailBiz;
+    private IStoredetailBiz StoredetailBiz;
 
-    public void setStoredetailBiz(IStoredetailBiz storedetailBiz) {
-        this.storedetailBiz = storedetailBiz;
+    public void setStoredetailBiz(IStoredetailBiz StoredetailBiz) {
+        setBaseBiz(StoredetailBiz);
+        this.StoredetailBiz = StoredetailBiz;
     }
-    private Integer page;
-    private Integer rows;
-    public void setPage(Integer page) {
-        this.page = page;
+    public String delete() {
+        try {
+            Storedetail t1 = StoredetailBiz.findById(Storedetail.getUuid());
+            StoredetailBiz.delete(t1);
+            ajaxReturn("msg", "删除成功");
+        } catch (Exception e) {
+            ajaxReturn("msg", "删除失败");
+        }
+        return NONE;
+
     }
 
-    public void setRows(Integer rows) {
-        this.rows = rows;
+    /**
+     * 回显数据
+     *
+     * @return
+     */
+    public String edit() {
+        Storedetail byId = StoredetailBiz.findById(Storedetail.getUuid());
+        String jsonString = JSON.toJSONString(byId);
+        respone(jsonString);
+        return NONE;
     }
 }

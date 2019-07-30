@@ -1,6 +1,8 @@
 package com.web.action;
 
+import com.alibaba.fastjson.JSON;
 import com.biz.IGoodsBiz;
+import com.entity.Goods;
 import com.entity.Goods;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -11,24 +13,40 @@ import com.opensymphony.xwork2.ModelDriven;
  * @author: zt648
  * @create: 2019-07-18 20:10
  **/
-public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
+public class GoodsAction extends BaseAction<Goods> implements ModelDriven<Goods> {
     private Goods goods = new Goods();
     @Override
     public Goods getModel() {
+        super.setT(goods);
         return goods;
     }
     private IGoodsBiz goodsBiz;
 
     public void setGoodsBiz(IGoodsBiz goodsBiz) {
+        super.setBaseBiz(goodsBiz);
         this.goodsBiz = goodsBiz;
     }
-    private Integer page;
-    private Integer rows;
-    public void setPage(Integer page) {
-        this.page = page;
+    public String delete() {
+        try {
+            Goods t1 = goodsBiz.findById(goods.getUuid());
+            goodsBiz.delete(t1);
+            ajaxReturn("msg", "删除成功");
+        } catch (Exception e) {
+            ajaxReturn("msg", "删除失败");
+        }
+        return NONE;
+
     }
 
-    public void setRows(Integer rows) {
-        this.rows = rows;
+    /**
+     * 回显数据
+     *
+     * @return
+     */
+    public String edit() {
+        Goods byId = goodsBiz.findById(goods.getUuid());
+        String jsonString = JSON.toJSONString(byId);
+        respone(jsonString);
+        return NONE;
     }
 }

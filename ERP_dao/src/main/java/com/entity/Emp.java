@@ -1,6 +1,9 @@
 package com.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.sql.Time;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -10,22 +13,24 @@ import java.util.Objects;
  * @create: 2019-07-18 17:49
  **/
 public class Emp {
-    private long uuid;
+    private Long uuid;
     private String username;
+    //不让他序列化
+    @JSONField(serialize = false)
     private String pwd;
     private String name;
     private Long gender;
     private String email;
     private String tele;
     private String address;
-    private Time birthday;
-    private Long depuuid;
+    private Date birthday;
+    private Dep dep;
 
-    public long getUuid() {
+    public Long getUuid() {
         return uuid;
     }
 
-    public void setUuid(long uuid) {
+    public void setUuid(Long uuid) {
         this.uuid = uuid;
     }
 
@@ -85,41 +90,57 @@ public class Emp {
         this.address = address;
     }
 
-    public Time getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Time birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
-    public Long getDepuuid() {
-        return depuuid;
+    public Dep getDep() {
+        return dep;
     }
 
-    public void setDepuuid(Long depuuid) {
-        this.depuuid = depuuid;
+    public void setDep(Dep dep) {
+        this.dep = dep;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Emp)) return false;
         Emp emp = (Emp) o;
-        return uuid == emp.uuid &&
-                Objects.equals(username, emp.username) &&
-                Objects.equals(pwd, emp.pwd) &&
-                Objects.equals(name, emp.name) &&
-                Objects.equals(gender, emp.gender) &&
-                Objects.equals(email, emp.email) &&
-                Objects.equals(tele, emp.tele) &&
-                Objects.equals(address, emp.address) &&
-                Objects.equals(birthday, emp.birthday) &&
-                Objects.equals(depuuid, emp.depuuid);
+        return Objects.equals(getUuid(), emp.getUuid()) &&
+                Objects.equals(getUsername(), emp.getUsername()) &&
+                Objects.equals(getPwd(), emp.getPwd()) &&
+                Objects.equals(getName(), emp.getName()) &&
+                Objects.equals(getGender(), emp.getGender()) &&
+                Objects.equals(getEmail(), emp.getEmail()) &&
+                Objects.equals(getTele(), emp.getTele()) &&
+                Objects.equals(getAddress(), emp.getAddress()) &&
+                Objects.equals(getBirthday(), emp.getBirthday()) &&
+                Objects.equals(getDep(), emp.getDep());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, username, pwd, name, gender, email, tele, address, birthday, depuuid);
+        return Objects.hash(getUuid(), getUsername(), getPwd(), getName(), getGender(), getEmail(), getTele(), getAddress(), getBirthday(), getDep());
+    }
+
+    @Override
+    public String toString() {
+        return "Emp{" +
+                "uuid=" + uuid +
+                ", username='" + username + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", email='" + email + '\'' +
+                ", tele='" + tele + '\'' +
+                ", address='" + address + '\'' +
+                ", birthday=" + birthday +
+                ", dep=" + dep +
+                '}';
     }
 }

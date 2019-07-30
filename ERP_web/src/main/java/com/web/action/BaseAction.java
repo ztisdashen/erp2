@@ -1,6 +1,7 @@
 package com.web.action;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.biz.IBaseBiz;
 import com.entity.Page;
 import com.opensymphony.xwork2.ActionSupport;
@@ -8,6 +9,7 @@ import org.apache.struts2.ServletActionContext;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,13 +38,21 @@ public class BaseAction<T> extends ActionSupport {
         this.baseBiz = baseBiz;
     }
 
+    public String listAll(){
+        List<T> list = baseBiz.findAll();
+        String toJSONString = JSON.toJSONString(list);
+        respone(toJSONString);
+        return NONE;
+    }
+
     public String findAll() {
         //条件查询
         Page<T> pages = baseBiz.findByPage(t, page, rows);
         Map<String, Object> map = new HashMap<>();
         map.put("total", pages.getTotalSize());
         map.put("rows", pages.getList());
-        String jsonString = JSON.toJSONString(map);
+        //禁用引用,如果发现有相同的对象，就会变成引用，而不直接的
+        String jsonString = JSON.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect);
 
         respone(jsonString);
         return NONE;

@@ -41,7 +41,7 @@ http://www.springframework.org/schema/context
         <property name="dataSource" ref="dataSource"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
+<!--                <prop key="hibernate.hbm2ddl.auto">update</prop>-->
                 <prop key="show_sql">true</prop>
                 <prop key="dialect">org.hibernate.dialect.Oracle10gDialect</prop>
                 <prop key="format_sql">true</prop>

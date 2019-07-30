@@ -5,7 +5,12 @@
 <hibernate-mapping>
 
     <class name="com.entity.Supplier" table="SUPPLIER" schema="ERP">
-        <id name="uuid" column="UUID"/>
+        <id name="uuid" column="UUID">
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
+                <!--                我们设立的主键生成器   -->
+                <param name="sequence_name">SUPPLIER_seq</param>
+            </generator>
+        </id>
         <property name="name" column="NAME"/>
         <property name="address" column="ADDRESS"/>
         <property name="contact" column="CONTACT"/>

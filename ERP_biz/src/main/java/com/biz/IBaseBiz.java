@@ -3,6 +3,8 @@ package com.biz;
 
 import com.entity.Page;
 
+import java.util.List;
+
 
 public interface IBaseBiz<T> {
 
@@ -16,4 +18,6 @@ public interface IBaseBiz<T> {
     T findById(long uuid);
 
     void edit(T t);
+
+    List<T> findAll();
 }
