@@ -1,5 +1,6 @@
 package com.entity;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -13,7 +14,15 @@ public class Menu {
     private String menuname;
     private String icon;
     private String url;
-    private String pid;
+    private List<Menu> menus;
+
+    public List<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
+    }
 
     public String getMenuid() {
         return menuid;
@@ -47,28 +56,21 @@ public class Menu {
         this.url = url;
     }
 
-    public String getPid() {
-        return pid;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Menu)) return false;
         Menu menu = (Menu) o;
-        return Objects.equals(menuid, menu.menuid) &&
-                Objects.equals(menuname, menu.menuname) &&
-                Objects.equals(icon, menu.icon) &&
-                Objects.equals(url, menu.url) &&
-                Objects.equals(pid, menu.pid);
+        return Objects.equals(getMenuid(), menu.getMenuid()) &&
+                Objects.equals(getMenuname(), menu.getMenuname()) &&
+                Objects.equals(getIcon(), menu.getIcon()) &&
+                Objects.equals(getUrl(), menu.getUrl()) &&
+                Objects.equals(getMenus(), menu.getMenus());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(menuid, menuname, icon, url, pid);
+        return Objects.hash(getMenuid(), getMenuname(), getIcon(), getUrl(), getMenus());
     }
 }

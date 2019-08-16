@@ -9,7 +9,7 @@ import java.util.Objects;
  * @create: 2019-07-18 17:50
  **/
 public class Supplier {
-    private long uuid;
+    private Long uuid;
     private String name;
     private String address;
     private String contact;
@@ -17,11 +17,11 @@ public class Supplier {
     private String email;
     private String type;
 
-    public long getUuid() {
+    public Long getUuid() {
         return uuid;
     }
 
-    public void setUuid(long uuid) {
+    public void setUuid(Long uuid) {
         this.uuid = uuid;
     }
 

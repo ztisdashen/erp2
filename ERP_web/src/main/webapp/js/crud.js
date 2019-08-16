@@ -1,6 +1,8 @@
+var listParam ="";
+
 $(function () {
     $('#dg').datagrid({
-        url: actionName+"_findAll.action",
+        url: actionName+"_findAll.action"+listParam,
         columns: columns,
         //是否条纹显示
         striped:true,
@@ -64,7 +66,7 @@ function edit2(s1,s2) {
         return;
     else {
         $("#form"+s1).form("submit",{
-            url:actionName+'_'+s2+".action",
+            url:actionName+'_'+s2+".action"+listParam,
             success:function (data) {
                 var data2 = eval('(' + data + ')'); // change the JSON string to javascript object
                 $.messager.show({

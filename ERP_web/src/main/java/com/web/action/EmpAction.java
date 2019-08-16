@@ -29,7 +29,20 @@ public class EmpAction extends BaseAction<Emp> implements ModelDriven<Emp> {
         this.empBiz = empBiz;
     }
     private Emp emp2;
+    public String resetPWD(){
+        Emp tmpEmp = empBiz.findById(emp.getUuid());
+        tmpEmp.setPwd(emp.getPwd());
+        try{
+            empBiz.updateResetPWD(tmpEmp);
+            ajaxReturn(true,"重置成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            ajaxReturn(false,"重置失败");
+        }
 
+        return NONE;
+
+    }
     public String delete() {
         try {
             Emp t1 = empBiz.findById(emp.getUuid());
@@ -51,6 +64,18 @@ public class EmpAction extends BaseAction<Emp> implements ModelDriven<Emp> {
         Emp byId = empBiz.findById(emp.getUuid());
         String jsonString = JSON.toJSONStringWithDateFormat(byId,"yyyy-MM-dd");
         respone(jsonString);
+        return NONE;
+    }
+
+    @Override
+    public String editFinal() {
+        try {
+            empBiz.updateResetPWD(emp);
+            ajaxReturn("msg","修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            ajaxReturn("msg","修改失败");
+        }
         return NONE;
     }
 

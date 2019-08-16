@@ -62,6 +62,11 @@ public class BaseBizImpl<T> implements IBaseBiz<T>, Serializable {
     }
 
     @Override
+    public T findById(String uuid) {
+        return baseDao.findById(uuid);
+    }
+
+    @Override
     public void edit(T t) {
         baseDao.edit(t);
     }

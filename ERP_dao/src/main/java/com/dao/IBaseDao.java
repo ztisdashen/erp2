@@ -11,6 +11,7 @@ public interface IBaseDao<T> {
     T findById(Long uuid);
     int getCount(DetachedCriteria criteria);
     List<T> findByPage(DetachedCriteria criteria, int begin, Integer rows);
-
+    T findById(String uuid);
     List<T> findAll();
+    void update(T t);
 }

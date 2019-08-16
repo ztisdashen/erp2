@@ -25,6 +25,17 @@ import java.util.Map;
 public class LoginAction extends ActionSupport implements ModelDriven<Emp> {
     private Emp emp = new Emp();
     private IEmpBiz empBiz;
+    private String oldPassword;
+    private String newPassword;
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
     @Override
     public Emp getModel() {
         return emp;
@@ -37,6 +48,7 @@ public class LoginAction extends ActionSupport implements ModelDriven<Emp> {
     public String checkUser(){
         try {
             Emp emp = empBiz.findByNameAndPwd(this.emp);
+            System.out.println(emp.getPwd());
             if(emp!=null){
                 ActionContext.getContext().getSession().put("loginUser",emp);
                 ajaxReturn(true,"登陆成功");
@@ -83,6 +95,23 @@ public class LoginAction extends ActionSupport implements ModelDriven<Emp> {
             ajaxReturn(true,emp.getName());
         else
             ajaxReturn(false,"");
+        return NONE;
+    }
+
+    public String updatePwd(){
+        System.out.println(newPassword+" "+oldPassword);
+        Emp emp = (Emp) ActionContext.getContext().getSession().get("loginUser");
+        if(emp == null){
+            ajaxReturn(false,"请重新登录");
+        }else {
+            try{
+                empBiz.updatePWD(emp,newPassword,oldPassword);
+                ajaxReturn(true,"修改密码成功");
+            }catch (Exception e){
+                e.printStackTrace();
+                ajaxReturn(false,"修改密码失败");
+            }
+        }
         return NONE;
     }
 }

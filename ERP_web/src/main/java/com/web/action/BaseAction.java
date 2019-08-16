@@ -81,7 +81,13 @@ public class BaseAction<T> extends ActionSupport {
         respone(jsonString);
         return NONE;
     }
-
+    public void ajaxReturn(Object msg, Object info) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", msg);
+        map.put("msg",info);
+        String jsonString = JSON.toJSONString(map);
+        respone(jsonString);
+    }
     public void ajaxReturn(String msg, String info) {
         Map<String, String> map = new HashMap<>();
         map.put(msg, info);
@@ -94,6 +100,7 @@ public class BaseAction<T> extends ActionSupport {
             baseBiz.edit(t);
             ajaxReturn("msg","修改成功");
         } catch (Exception e) {
+            e.printStackTrace();
             ajaxReturn("msg","修改失败");
         }
 

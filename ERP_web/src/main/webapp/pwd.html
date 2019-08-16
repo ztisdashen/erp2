@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="./themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./themes/icon.css">
+    <script type="text/javascript" src="./js/jquery-3.4.0.js"></script>
+    <script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <script type="text/javascript" src="./locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="js/jquery.serializejson.js"></script>
+    <script type="text/javascript" src="js/date.js"></script>
+    <script type="text/javascript" src="js/pwd.js"></script>
+</head>
+<body>
+<table id="dg" style="width: 100%">
+
+</table>
+
+<div id="winEdit" class="easyui-window" title="重置密码" style="width:300px;height:150px"
+     data-options="iconCls:'icon-save',modal:true,closed:true">
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'center'" style="padding:10px;border-bottom: none">
+            <form id="formEdit" method="post">
+                <TABLE cellSpacing=0 cellPadding=5  border=0>
+
+                    <tr>
+                        <td>
+                            <input name="uuid" type="hidden">
+                        </td>
+                        <td>员工密码：</td>
+                        <td>
+                            <INPUT class="textbox" type="password" style="WIDTH: 150px" maxLength=50 name="pwd">
+                        </td>
+                    </tr>
+                </TABLE>
+            </form>
+        </div>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="subPWD()" style="width:80px">重置</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

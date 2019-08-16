@@ -16,7 +16,7 @@ public interface IBaseBiz<T> {
     void delete(T t);
 
     T findById(long uuid);
-
+    T findById(String uuid);
     void edit(T t);
 
     List<T> findAll();

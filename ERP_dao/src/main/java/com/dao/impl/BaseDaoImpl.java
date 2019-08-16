@@ -56,6 +56,11 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
     }
 
     @Override
+    public T findById(String uuid) {
+        return  this.getHibernateTemplate().get(aClass,uuid);
+    }
+
+    @Override
     public List<T> findByPage(DetachedCriteria criteria, int begin, Integer rows) {
         criteria.setProjection(null);
 
@@ -65,5 +70,10 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
     @Override
     public List<T> findAll() {
         return (List<T>) this.getHibernateTemplate().findByCriteria(DetachedCriteria.forClass(aClass));
+    }
+
+    @Override
+    public void update(T t) {
+        this.getHibernateTemplate().update(t);
     }
 }

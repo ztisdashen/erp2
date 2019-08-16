@@ -5,6 +5,8 @@ import com.biz.Utils;
 import com.dao.IEmpDao;
 import com.entity.Emp;
 import com.entity.Page;
+import com.exception.ERPException;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
@@ -20,7 +22,7 @@ import java.util.List;
  **/
 public class EmpBizImpl extends BaseBizImpl<Emp> implements IEmpBiz {
     private IEmpDao empDao;
-
+    private static final int HASH_ITERATION = 2;
     public void setEmpDao(IEmpDao empDao) {
         super.setBaseDao(empDao);
         this.empDao = empDao;
@@ -76,6 +78,52 @@ public class EmpBizImpl extends BaseBizImpl<Emp> implements IEmpBiz {
             return null;
         if(emp.getPwd() == null || emp.getPwd().trim().equals(""))
             return null;
+        emp.setPwd(getPWD(emp.getPwd(),emp.getUsername()));
+        System.out.println(emp.getPwd());
         return empDao.findByNameAndPassWord(emp);
     }
+
+    @Override
+    public void updatePWD(Emp emp, String newPwd,String oldPwd) {
+        //System.out.println(oldPwd);
+        String pwd = emp.getPwd();
+        System.out.println(pwd + " "+getPWD(oldPwd,emp.getUsername())+" "+getPWD(newPwd,emp.getUsername()));
+        if(!getPWD(oldPwd,emp.getUsername()).equals(pwd)){
+            throw new ERPException("旧密码不正确");
+        }else {
+            String pwdPass = getPWD(newPwd,emp.getUsername());
+            emp.setPwd(pwdPass);
+            System.out.println(emp.getPwd());
+            empDao.update(emp);
+        }
+    }
+
+    @Override
+    public void updateResetPWD(Emp tmpEmp) {
+        tmpEmp.setPwd(getPWD(tmpEmp.getPwd(),tmpEmp.getUsername()));
+        empDao.update(tmpEmp);
+    }
+
+
+    private String getPWD(String pwd, String username) {
+        Md5Hash md5Hash = new Md5Hash(pwd,username,HASH_ITERATION);
+        return md5Hash.toString();
+    }
+
+    @Override
+    public void add(Emp emp) {
+        //String pwd = emp.getPwd();
+        /**
+         * 源码
+         * 搅乱吗
+         * 搅乱次数
+         * 初始密码为用户名
+         */
+        String newPwd = getPWD(emp.getUsername(), emp.getUsername());
+        emp.setPwd(newPwd);
+        super.add(emp);
+    }
+
+
+
 }

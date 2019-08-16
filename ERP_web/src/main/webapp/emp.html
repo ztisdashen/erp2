@@ -50,10 +50,6 @@
                                 name="username"> &nbsp;&nbsp;&nbsp;
                 </td>
                 <td>
-                    员工密码：<input class="put22 easyui-textbox"  style="width:150px"
-                                name="pwd">&nbsp;&nbsp;&nbsp;
-                </td>
-                <td>
                     性别：
                     <input class="easyui-radiobutton" name="gender" value="">全部
                     <input class="easyui-radiobutton" name="gender" value="1">男
@@ -124,10 +120,15 @@
                         </td>
                     </TR>
                     <tr>
-                        <td>员工密码：</td>
+
+                        <td>生日：</td>
                         <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="pwd">
+                            <INPUT class="textbox easyui-datebox" editable="false" style="WIDTH: 150px" maxLength=50 name="birthday">
                         </td>
+<!--                        <td>员工密码：</td>-->
+<!--                        <td>-->
+<!--                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="pwd">-->
+<!--                        </td>-->
                         <td>部门编号：</td>
                         <td>
                             <input  class="easyui-combobox" name="dep.uuid"
@@ -157,13 +158,6 @@
                             <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="address">
                         </td>
                     </TR>
-                    <TR>
-
-                        <td>生日：</td>
-                        <td>
-                            <INPUT class="textbox easyui-datebox" editable="false" style="WIDTH: 150px" maxLength=50 name="birthday">
-                        </td>
-                    </TR>
                 </TABLE>
             </form>
         </div>
@@ -181,6 +175,7 @@
                     <TR>
                         <td>员工姓名：</td>
                         <td>
+                            <input type="hidden" name="uuid">
                             <INPUT class="textboxeasyui-validatebox"
                                    data-options="required:true,missingMessage:'登录名不能为空'"
                                    style="WIDTH: 150px" maxLength=50 name="username">

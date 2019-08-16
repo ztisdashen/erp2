@@ -3,28 +3,7 @@ window.onload = function () {
 };
 var onlyOpenTitle = "欢迎使用";//不允许关闭的标签的标题
 
-var _menus = {
-    "icon": "icon-sys",
-    "menuid": "0",
-    "menuname": "系统菜单",
-    "menus":
-        [
-            {
-                "icon": "icon-sys", "menuid": "100", "menuname": "人士管理", "menus":
-                    [
-                        {"icon": "icon-sys", "menuid": "101", "menuname": "部门管理", "url": ""},
-                        {"icon": "icon-sys", "menuid": "102", "menuname": "员工管理", "url": ""}
-                    ]
-            }, {
-            "icon": "icon-sys", "menuid": "100", "menuname": "基础数据", "menus":
-                [
-                    {"icon": "icon-sys", "menuid": "101", "menuname": "商品类型管理", "url": ""},
-                    {"icon": "icon-sys", "menuid": "102", "menuname": "商品管理", "url": ""}
-                ]
-        }
-
-        ]
-};
+var _menus;
 
 
 $(function () {
@@ -32,7 +11,11 @@ $(function () {
     showName();
 
     //限制性showname
-    InitLeftMenu();
+    // InitLeftMenu();
+    $.post('menu_getMenuTree.action', function (data) {
+        _menus = data;
+        InitLeftMenu()
+    }, 'json');
     tabClose();
     tabCloseEven();
     $("#loginOut").bind("click", function () {
@@ -302,14 +285,52 @@ function msgShow(title, msgString, msgType) {
 
 //设置登录窗口
 function openPwd() {
-    $('#w').window({
+    $('#w').dialog({
         title: '修改密码',
         width: 300,
         modal: true,
         shadow: true,
         closed: true,
-        height: 160,
-        resizable: false
+        height: 200,
+        resizable: false,
+        buttons: [{
+            text: '保存',
+            iconCls: 'icon-save',
+            handler: function () {
+                var $txtNewPass = $("#txtNewPass").val();
+                var $txtOldPass = $("#txtOldPass").val();
+                var $txtRePass = $("#txtRePass").val();
+                if ($txtNewPass == '') {
+                    $.messager.alert('提示', '新密码不能为空', 'info');
+                    return;
+                }
+                if ($txtOldPass == '') {
+                    $.messager.alert('提示', '旧密码不能为空', 'info');
+                    return;
+                }
+                if ($txtNewPass != $txtRePass) {
+                    $.messager.alert('提示', '两次密码不一致', 'info');
+                    return;
+                }
+                var msg = {newPassword: $txtNewPass, oldPassword: $txtOldPass};
+                $.post('login_updatePwd.action', msg, function (data) {
+                        $.messager.alert('提示', data.msg, 'info');
+                        if(data.success){
+                            $('#w').dialog('close');
+                            $("#txtRePass").val('');
+                            $("#txtOldPass").val('');
+                            $("#txtNewPass").val('');
+                        }
+                    }
+                , 'json')
+            }
+        }, {
+            text: '取消',
+            iconCls: 'icon-cancel',
+            handler: function () {
+                $('#w').dialog('close')
+            }
+        }]
     });
 }
 
