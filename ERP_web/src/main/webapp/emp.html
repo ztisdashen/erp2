@@ -83,8 +83,8 @@
                                  data-options="valueField:'uuid',textField:'name',url:'dep_listAll.action'">
                 </td>
                 <td>
-                生日：&nbsp;&nbsp;&nbsp;&nbsp;<input class="put22 easyui-textbox"  style="width:150px"
-                              name="birthday"> &nbsp;&nbsp;&nbsp;
+                生日：&nbsp;&nbsp;&nbsp;&nbsp;<input class="put22 easyui-datebox " editable="false" style="width:150px"
+                              name="birthday"> --><input class="put22 easyui-datebox " editable="false" style="width:150px" name="emp2.birthday">
                 </td>
                 <td>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
@@ -199,7 +199,7 @@
                         <td>部门编号：</td>
                         <td>
                             <input id="cc" class="easyui-combobox" name="dep.uuid"
-                                   data-options="valueField:'uuid',textField:'name',url:'dep_listAll.action'">
+                                   data-options="valueField:'uuid',textField:'name',url:'dep_listAll.action',required:true">
                         </td>
                     </TR>
 

@@ -15,6 +15,8 @@ import com.opensymphony.xwork2.ModelDriven;
  **/
 public class GoodsAction extends BaseAction<Goods> implements ModelDriven<Goods> {
     private Goods goods = new Goods();
+    private Goods goods2;
+
     @Override
     public Goods getModel() {
         super.setT(goods);
@@ -48,5 +50,10 @@ public class GoodsAction extends BaseAction<Goods> implements ModelDriven<Goods>
         String jsonString = JSON.toJSONString(byId);
         respone(jsonString);
         return NONE;
+    }
+
+    public void setGoods2(Goods goods2) {
+        super.setT2(goods2);
+        this.goods2 = goods2;
     }
 }

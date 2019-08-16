@@ -20,6 +20,7 @@ import java.util.Map;
  **/
 public class BaseAction<T> extends ActionSupport {
     private T t;
+    private T t2;
     private IBaseBiz<T> baseBiz;
     private Integer page;
     private Integer rows;
@@ -47,7 +48,7 @@ public class BaseAction<T> extends ActionSupport {
 
     public String findAll() {
         //条件查询
-        Page<T> pages = baseBiz.findByPage(t, page, rows);
+        Page<T> pages = baseBiz.findByPage(t,t2, page, rows);
         Map<String, Object> map = new HashMap<>();
         map.put("total", pages.getTotalSize());
         map.put("rows", pages.getList());
@@ -99,4 +100,7 @@ public class BaseAction<T> extends ActionSupport {
         return NONE;
     }
 
+    public void setT2(T t2) {
+        this.t2 = t2;
+    }
 }

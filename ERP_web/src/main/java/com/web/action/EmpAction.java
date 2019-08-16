@@ -7,6 +7,8 @@ import com.entity.Emp;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
+import java.util.Date;
+
 /**
  * @program: erp2
  * @description:
@@ -26,6 +28,8 @@ public class EmpAction extends BaseAction<Emp> implements ModelDriven<Emp> {
         super.setBaseBiz(empBiz);
         this.empBiz = empBiz;
     }
+    private Emp emp2;
+
     public String delete() {
         try {
             Emp t1 = empBiz.findById(emp.getUuid());
@@ -45,8 +49,13 @@ public class EmpAction extends BaseAction<Emp> implements ModelDriven<Emp> {
      */
     public String edit() {
         Emp byId = empBiz.findById(emp.getUuid());
-        String jsonString = JSON.toJSONString(byId);
+        String jsonString = JSON.toJSONStringWithDateFormat(byId,"yyyy-MM-dd");
         respone(jsonString);
         return NONE;
+    }
+
+    public void setEmp2(Emp emp2) {
+        super.setT2(emp2);
+        this.emp2 = emp2;
     }
 }

@@ -31,9 +31,7 @@ $(function () {
         var json = $("#searchForm").serializeJSON();
         //load 通过json发起请求，根据返回的数据重新加载
         $('#dg').datagrid("load",json);
-        // $(".put22").each(function () {
-        //     $(this).prop("value","");
-        // })
+
         $("#searchForm").form("clear");
 
     });

@@ -65,6 +65,8 @@ http://www.springframework.org/schema/context
     <bean class="com.web.action.EmpAction" id="empAction" scope="prototype">
         <property name="empBiz" ref="empBiz"/>
     </bean>
-
+    <bean class="com.web.action.LoginAction" id="loginAction" scope="prototype">
+        <property name="empBiz" ref="empBiz"/>
+    </bean>
 
 </beans>

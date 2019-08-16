@@ -9,20 +9,20 @@ import java.util.Objects;
  * @create: 2019-07-18 17:49
  **/
 public class Goods {
-    private long uuid;
+    private Long uuid;
     private String name;
     private String origin;
     private String producer;
     private String unit;
-    private Long inprice;
-    private Long outprice;
-    private Long goodstypeuuid;
+    private Double inprice;
+    private Double outprice;
+    private Goodstype goodstype;
 
-    public long getUuid() {
+    public Long getUuid() {
         return uuid;
     }
 
-    public void setUuid(long uuid) {
+    public void setUuid(Long uuid) {
         this.uuid = uuid;
     }
 
@@ -58,47 +58,41 @@ public class Goods {
         this.unit = unit;
     }
 
-    public Long getInprice() {
+    public Double getInprice() {
         return inprice;
     }
 
-    public void setInprice(Long inprice) {
+    public void setInprice(Double inprice) {
         this.inprice = inprice;
     }
 
-    public Long getOutprice() {
+    public Double getOutprice() {
         return outprice;
     }
 
-    public void setOutprice(Long outprice) {
+    public void setOutprice(Double outprice) {
         this.outprice = outprice;
     }
 
-    public Long getGoodstypeuuid() {
-        return goodstypeuuid;
-    }
-
-    public void setGoodstypeuuid(Long goodstypeuuid) {
-        this.goodstypeuuid = goodstypeuuid;
+    public Goodstype getGoodstype() {
+        return goodstype;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Goods goods = (Goods) o;
-        return uuid == goods.uuid &&
-                Objects.equals(name, goods.name) &&
-                Objects.equals(origin, goods.origin) &&
-                Objects.equals(producer, goods.producer) &&
-                Objects.equals(unit, goods.unit) &&
-                Objects.equals(inprice, goods.inprice) &&
-                Objects.equals(outprice, goods.outprice) &&
-                Objects.equals(goodstypeuuid, goods.goodstypeuuid);
+    public String toString() {
+        return "Goods{" +
+                "uuid=" + uuid +
+                ", name='" + name + '\'' +
+                ", origin='" + origin + '\'' +
+                ", producer='" + producer + '\'' +
+                ", unit='" + unit + '\'' +
+                ", inprice=" + inprice +
+                ", outprice=" + outprice +
+                ", goodstype=" + goodstype +
+                '}';
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(uuid, name, origin, producer, unit, inprice, outprice, goodstypeuuid);
+    public void setGoodstype(Goodstype goodstype) {
+        this.goodstype = goodstype;
     }
 }

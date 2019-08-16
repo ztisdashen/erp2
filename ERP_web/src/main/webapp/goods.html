@@ -1,0 +1,207 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="./themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./themes/icon.css">
+    <script type="text/javascript" src="./js/jquery-3.4.0.js"></script>
+    <script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <script type="text/javascript" src="./locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="js/jquery.serializejson.js"></script>
+    <script type="text/javascript" src="js/crud.js"></script>
+    <script type="text/javascript" src="js/date.js"></script>
+    <script type="text/javascript">
+        var actionName = "goods";
+        var columns =  [[
+            {field: 'uuid', title: '商品编号', width: 100},
+            {field: 'name', title: '商品名', width: 100},
+            {field: 'origin', title: '产地', width: 100},
+            {field: 'producer', title: '厂家', width: 100},
+            {field: 'unit', title: '计量单位', width: 150},
+            {field: 'inprice', title: '进货价格', width: 100},
+            {field: 'outprice', title: '出货价格', width: 200},
+            {field: 'goodstype', title: '商品类型', width: 100,formatter:function (value, row, index) {
+                return value.name;
+                }},
+            {field:'ssss',title:'操作',formatter:function (value,row,index) {
+                    var del = '<a href="javascript:void(0)" class="menuA" onclick="del('+row.uuid+')">删除</a>|';
+                    var edit='<a href="javascript:void(0)" onclick="edit('+row.uuid+')" class="menuA">修改</a>';
+                    return del+edit;
+                },width:150}
+        ]];
+    </script>
+</head>
+<body class="font">
+<div class="easyui-panel" style="padding-left: 4px;border-bottom: none">
+    <form id="searchForm">
+        <table >
+            <tr>
+                <td>
+                    商品名：<input class="put22 easyui-textbox"  style="width:150px"
+                               name="name"> &nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    产地：<input class="put22 easyui-textbox"  style="width:150px"
+                                name="origin">&nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    厂家：
+                    <input class="put22 easyui-textbox"  style="width:150px"
+                           name="producer">&nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    计量单位：<input class="put22 easyui-textbox"  style="width:150px"
+                                name="unit">&nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    进货价格：<input class="put22 easyui-numberbox" data-options="min:0,prefix:'￥',precision:2"  style="width:150px"
+                              name="inprice">
+                </td>
+                <td>
+                    --><input class="put22 easyui-numberbox" data-options="min:0,prefix:'￥',precision:2"  style="width:150px"
+                                name="goods2.inprice"> &nbsp;&nbsp;&nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+                    出货价格：&nbsp;<input class="put22 easyui-numberbox" data-options="min:0,prefix:'￥',precision:2"  style="width:150px"
+                                          name="outprice">
+                </td>
+                <td>
+
+                   --><input class="put22 easyui-numberbox" data-options="min:0,prefix:'￥',precision:2"  style="width:150px"
+                                      name="goods2.outprice">&nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    商品类型：&nbsp;&nbsp;&nbsp;&nbsp;     <input  class="easyui-combobox" name="goodstype.uuid"
+                                                              data-options="valueField:'uuid',textField:'name',url:'goodstype_listAll.action'"> &nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<table id="dg" style="width: 100%">
+
+</table>
+
+<!-- 添加客户的表单，默认是隐藏的 -->
+<div id="winSave" class="easyui-window" title="添加客户" style="width:550px;height:300px"
+     data-options="iconCls:'icon-save',modal:true,closed:true">
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'center'" style="padding:10px;border-bottom: none">
+            <form id="formSave" method="post">
+                <TABLE cellSpacing=0 cellPadding=5  border=0>
+                    <TR>
+                        <td>商品名：</td>
+                        <td>
+                            <INPUT class="textbox easyui-validatebox"
+                                   data-options="required:true,missingMessage:'登录名不能为空'"
+                                   style="WIDTH: 150px" maxLength=50 name="name">
+                        </td>
+                        <td>产地：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="origin">
+                        </td>
+                    </TR>
+                    <tr>
+                        <td>厂家：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="producer">
+                        </td>
+
+                    </TR>
+
+                    <TR>
+                        <td>计量单位：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="unit">
+                        </td>
+                        <td>进货价格：</td>
+                        <td>
+                            <input class="textbox easyui-numberbox" data-options="min:0,prefix:'￥',precision:2" style="WIDTH: 150px" maxLength=50 name="inprice">
+                        </td>
+                    </TR>
+                    <TR>
+                        <td>出货价格：</td>
+                        <td>
+                             <input class="textbox easyui-numberbox" data-options="min:0,prefix:'￥',precision:2" style="WIDTH: 150px" maxLength=50 name="outprice">
+                        </td>
+                        <td>商品类型：</td>
+                        <td>
+                            <input  class="easyui-combobox" name="goodstype.uuid"
+                                    data-options="valueField:'uuid',textField:'name',url:'goodstype_listAll.action'">
+                        </td>
+                    </TR>
+
+                </TABLE>
+            </form>
+        </div>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="edit2('Save','save')" style="width:80px">保存</a>
+        </div>
+    </div>
+</div>
+<div id="winEdit" class="easyui-window" title="修改客户" style="width:550px;height:300px"
+     data-options="iconCls:'icon-save',modal:true,closed:true">
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'center'" style="padding:10px;border-bottom: none">
+            <form id="formEdit" method="post">
+                <TABLE cellSpacing=0 cellPadding=5  border=0>
+                    <TR>
+                        <td>商品名：</td>
+                        <td>
+                            <INPUT class="textbox easyui-validatebox"
+                                   data-options="required:true,missingMessage:'登录名不能为空'"
+                                   style="WIDTH: 150px" maxLength=50 name="name">
+                        </td>
+                        <td>产地：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="origin">
+                        </td>
+                    </TR>
+                    <tr>
+                        <td>厂家：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="producer">
+                        </td>
+
+                    </TR>
+
+                    <TR>
+                        <td>计量单位：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="unit">
+                        </td>
+                        <td>进货价格：</td>
+                        <td>
+                            <input class="textbox easyui-numberbox" data-options="min:0,prefix:'￥',precision:2" style="WIDTH: 150px" maxLength=50 name="inprice">
+                        </td>
+                    </TR>
+                    <TR>
+                        <td>出货价格：</td>
+                        <td>
+                            <input class="textbox easyui-numberbox" data-options="min:0,prefix:'￥',precision:2"  style="WIDTH: 150px" maxLength=50 name="outprice">
+                        </td>
+                        <td>商品类型：</td>
+                        <td>
+
+                            <input  class="easyui-combobox" name="goodstype.uuid"
+                                    data-options="valueField:'uuid',textField:'name',url:'goodstype_listAll.action'">
+                        </td>
+                    </TR>
+                </TABLE>
+            </form>
+        </div>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="edit2('Edit','editFinal')" style="width:80px">修改</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

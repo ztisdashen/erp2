@@ -9,14 +9,14 @@ import java.util.Objects;
  * @create: 2019-07-18 17:49
  **/
 public class Goodstype {
-    private long uuid;
+    private Long uuid;
     private String name;
 
-    public long getUuid() {
+    public Long getUuid() {
         return uuid;
     }
 
-    public void setUuid(long uuid) {
+    public void setUuid(Long uuid) {
         this.uuid = uuid;
     }
 

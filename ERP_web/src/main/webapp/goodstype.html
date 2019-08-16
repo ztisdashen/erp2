@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="./themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./themes/icon.css">
+    <script type="text/javascript" src="./js/jquery-3.4.0.js"></script>
+    <script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <script type="text/javascript" src="./locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="js/jquery.serializejson.js"></script>
+    <script type="text/javascript" src="js/crud.js"></script>
+    <script type="text/javascript">
+        var actionName = "goodstype";
+        var columns =  [[
+            {field: 'uuid', title: '编号', width: 100},
+            {field: 'name', title: '类型名称', width: 150},
+            {field:'ssss',title:'操作',formatter:function (value,row,index) {
+                    var del = '<a href="javascript:void(0)" class="menuA" onclick="del('+row.uuid+')">删除</a>|';
+                    var edit='<a href="javascript:void(0)" onclick="edit('+row.uuid+')" class="menuA">修改</a>';
+                    return del+edit;
+                }}
+        ]];
+    </script>
+</head>
+<body class="font">
+<div class="easyui-panel" style="padding-left: 4px;border-bottom: none">
+    <form id="searchForm">
+        <table >
+            <tr>
+                <td>
+                    名称：<input class="put22 easyui-textbox"  style="width:150px"
+                                name="name"> &nbsp;&nbsp;&nbsp;
+                    <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<table id="dg" style="width: 100%">
+
+</table>
+
+<!-- 添加客户的表单，默认是隐藏的 -->
+<div id="winSave" class="easyui-window" title="添加部门" style="width:300px;height:150px"
+     data-options="iconCls:'icon-save',modal:true,closed:true">
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'center'" style="padding:10px;border-bottom: none">
+            <form id="formSave" method="post">
+                <TABLE cellSpacing=0 cellPadding=5  border=0>
+                    <TR>
+                        <td>名称：</td>
+                        <td>
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="name">
+                        </td>
+                    </TR>
+                </TABLE>
+            </form>
+        </div>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="edit2('Save','save')" style="width:80px">保存</a>
+        </div>
+    </div>
+</div>
+<div id="winEdit" class="easyui-window" title="修改部门" style="width:300px;height:150px"
+     data-options="iconCls:'icon-save',modal:true,closed:true">
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'center'" style="padding:10px;border-bottom: none">
+            <form id="formEdit" method="post">
+                <TABLE cellSpacing=0 cellPadding=5  border=0>
+                    <TR>
+                        <td>部门名称：</td>
+                        <td>
+                            <INPUT type="hidden" name="uuid">
+                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="name">
+                        </td>
+                    </TR>
+                </TABLE>
+            </form>
+        </div>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="edit2('Edit','editFinal')" style="width:80px">修改</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

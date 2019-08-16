@@ -9,7 +9,7 @@ import java.util.List;
 public interface IBaseBiz<T> {
 
 
-    Page<T> findByPage(T t, Integer page, Integer rows);
+    Page<T> findByPage(T t,T t2, Integer page, Integer rows);
 
     void add(T t);
 

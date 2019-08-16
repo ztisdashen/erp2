@@ -26,7 +26,7 @@ public class BaseBizImpl<T> implements IBaseBiz<T>, Serializable {
     }
 
     @Override
-    public Page<T> findByPage(T t, Integer page, Integer rows) {
+    public Page<T> findByPage(T t,T t2, Integer page, Integer rows) {
         Page<T> page1 = new Page<>();
         page1.setCurrentPage(page);
         page1.setPageSize(rows);

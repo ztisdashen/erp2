@@ -14,4 +14,12 @@ import java.util.List;
  **/
 public class EmpDaoImpl extends BaseDaoImpl<Emp> implements IEmpDao {
 
+    @Override
+    public Emp findByNameAndPassWord(Emp emp) {
+
+        List<Emp> emps = this.getHibernateTemplate().findByExample(emp);
+        if(emps.size()>0)
+            return emps.get(0);
+        return null;
+    }
 }
