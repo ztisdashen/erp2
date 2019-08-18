@@ -68,8 +68,8 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
     }
 
     @Override
-    public List<T> findAll() {
-        return (List<T>) this.getHibernateTemplate().findByCriteria(DetachedCriteria.forClass(aClass));
+    public List<T> findAll(T t) {
+        return (List<T>) this.getHibernateTemplate().findByExample(t);
     }
 
     @Override

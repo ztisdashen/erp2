@@ -64,7 +64,7 @@ public class DepAction extends BaseAction<Dep> implements ModelDriven<Dep>{
     public String edit() {
         Dep byId = depBiz.findById(dep.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 

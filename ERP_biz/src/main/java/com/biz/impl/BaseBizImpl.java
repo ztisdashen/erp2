@@ -72,7 +72,7 @@ public class BaseBizImpl<T> implements IBaseBiz<T>, Serializable {
     }
 
     @Override
-    public List<T> findAll() {
-        return baseDao.findAll();
+    public List<T> findAll(T t) {
+        return baseDao.findAll(t);
     }
 }

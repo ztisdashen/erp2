@@ -47,7 +47,7 @@ public class ReturnOrderDetailAction extends BaseAction<Returnorderdetail> imple
     public String edit() {
         Returnorderdetail byId = returnOrderDetailBiz.findById(returnorderdetail.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 }

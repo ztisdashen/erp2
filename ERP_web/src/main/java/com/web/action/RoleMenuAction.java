@@ -46,7 +46,7 @@ public class RoleMenuAction extends BaseAction<RoleMenu> implements ModelDriven<
     public String edit() {
         RoleMenu byId = roleMenuBiz.findById(roleMenu.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 }

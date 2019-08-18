@@ -40,9 +40,9 @@ public class BaseAction<T> extends ActionSupport {
     }
 
     public String listAll(){
-        List<T> list = baseBiz.findAll();
-        String toJSONString = JSON.toJSONString(list);
-        respone(toJSONString);
+        List<T> list = baseBiz.findAll(t);
+        String toJSONString = JSON.toJSONString(list, SerializerFeature.DisableCircularReferenceDetect);
+        response(toJSONString);
         return NONE;
     }
 
@@ -55,11 +55,11 @@ public class BaseAction<T> extends ActionSupport {
         //禁用引用,如果发现有相同的对象，就会变成引用，而不直接的
         String jsonString = JSON.toJSONString(map, SerializerFeature.DisableCircularReferenceDetect);
 
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 
-    public void respone(String jsonString) {
+    public void response(String jsonString) {
         try {
             HttpServletResponse response = ServletActionContext.getResponse();
             response.setContentType("application/json;charset=utf-8");
@@ -78,7 +78,7 @@ public class BaseAction<T> extends ActionSupport {
             map.put("msg", "添加失败");
         }
         String jsonString = JSON.toJSONString(map);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
     public void ajaxReturn(Object msg, Object info) {
@@ -86,13 +86,13 @@ public class BaseAction<T> extends ActionSupport {
         map.put("success", msg);
         map.put("msg",info);
         String jsonString = JSON.toJSONString(map);
-        respone(jsonString);
+        response(jsonString);
     }
     public void ajaxReturn(String msg, String info) {
         Map<String, String> map = new HashMap<>();
         map.put(msg, info);
         String jsonString = JSON.toJSONString(map);
-        respone(jsonString);
+        response(jsonString);
     }
 
     public String editFinal() {

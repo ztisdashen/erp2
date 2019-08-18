@@ -46,7 +46,7 @@ public class OrderDetailAction extends BaseAction<Orderdetail> implements ModelD
     public String edit() {
         Orderdetail byId = orderdetailBiz.findById(orderdetail.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 }

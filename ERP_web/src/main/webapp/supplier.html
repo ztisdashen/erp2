@@ -28,7 +28,7 @@
             {field: 'contact', title: '联系人', width: 150},
             {field: 'tele', title: '电话', width: 100},
             {field: 'email', title: '邮件', width: 200},
-            {field: 'type', title: '1：供应商 2：客户', width: 200},
+            // {field: 'type', title: '1：供应商 2：客户', width: 200},
             {field:'ssss',title:'操作',formatter:function (value,row,index) {
                     var del = '<a href="javascript:void(0)" class="menuA" onclick="del('+row.uuid+')">删除</a>|';
                     var edit='<a href="javascript:void(0)" onclick="edit('+row.uuid+')" class="menuA">修改</a>';
@@ -60,10 +60,6 @@
 
                     电话：&nbsp;&nbsp;<input class="put22 easyui-textbox"  style="width:150px"
                                           name="tele">&nbsp;&nbsp;&nbsp;
-                </td>
-                <td>
-                    1：供应商&nbsp;2：客户&nbsp;&nbsp;&nbsp;&nbsp;<input class="put22 easyui-textbox"  style="width:150px"
-                                                      name="type"> &nbsp;&nbsp;&nbsp;
                 </td>
 
                 <td>

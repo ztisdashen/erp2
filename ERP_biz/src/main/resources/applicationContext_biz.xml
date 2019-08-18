@@ -18,7 +18,7 @@ http://www.springframework.org/schema/context
         <property name="dao" ref="depDao"/>
     </bean>
     <bean class="com.biz.impl.SupplierBizImpl" id="supplierBiz">
-        <property name="baseDao" ref="supplierDao"/>
+        <property name="supplierDao" ref="supplierDao"/>
     </bean>
     <bean class="com.biz.impl.StoreoperBizImpl" id="storeoperBiz">
         <property name="baseDao" ref="storeoperDao"/>
@@ -47,7 +47,7 @@ http://www.springframework.org/schema/context
     </bean>
 
     <bean class="com.biz.impl.OrdersBizImpl" id="ordersBiz">
-        <property name="baseDao" ref="ordersDao"/>
+        <property name="ordersDao" ref="ordersDao"/>
     </bean>
 
     <bean class="com.biz.impl.OrderdetailBizImpl" id="orderdetailBiz">

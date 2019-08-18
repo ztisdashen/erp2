@@ -47,7 +47,7 @@ public class EmpRoleAction extends BaseAction<EmpRole> implements ModelDriven<Em
     public String edit() {
         EmpRole byId = empRoleBiz.findById(empRole.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 }

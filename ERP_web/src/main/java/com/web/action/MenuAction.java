@@ -29,7 +29,7 @@ public class MenuAction extends BaseAction<Menu> implements ModelDriven<Menu> {
 
     public String getMenuTree(){
         Menu menu = menuBiz.findById("0");
-        respone(JSON.toJSONString(menu));
+        response(JSON.toJSONString(menu));
         return NONE;
     }
 

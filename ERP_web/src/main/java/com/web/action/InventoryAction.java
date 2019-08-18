@@ -44,7 +44,7 @@ public class InventoryAction extends BaseAction<Inventory> implements ModelDrive
     public String edit() {
         Inventory byId = inventoryBiz.findById(inventory.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 }

@@ -47,7 +47,7 @@ public class SupplierAction extends BaseAction<Supplier> implements ModelDriven<
     public String edit() {
         Supplier byId = supplierBiz.findById(supplier.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 }

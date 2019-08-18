@@ -1,5 +1,7 @@
 package com.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.sql.Time;
 import java.util.Objects;
 
@@ -10,23 +12,34 @@ import java.util.Objects;
  * @create: 2019-07-18 17:49
  **/
 public class Orderdetail {
-    private long uuid;
+    public static final String STATE_NOT_IN = "0";
+    public static final String STATE_IN = "1";
+    private Long uuid;
     private Long goodsuuid;
     private String goodsname;
-    private Long price;
+    private Double price;
     private Long num;
-    private Long money;
+    private Double money;
     private Time endtime;
     private Long ender;
     private Long storeuuid;
     private String state;
-    private Long ordersuuid;
+    @JSONField(serialize = false)
+    private Orders orders;
 
-    public long getUuid() {
+    public Orders getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Orders orders) {
+        this.orders = orders;
+    }
+
+    public Long getUuid() {
         return uuid;
     }
 
-    public void setUuid(long uuid) {
+    public void setUuid(Long uuid) {
         this.uuid = uuid;
     }
 
@@ -46,11 +59,11 @@ public class Orderdetail {
         this.goodsname = goodsname;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -62,11 +75,11 @@ public class Orderdetail {
         this.num = num;
     }
 
-    public Long getMoney() {
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(Long money) {
+    public void setMoney(Double money) {
         this.money = money;
     }
 
@@ -102,34 +115,6 @@ public class Orderdetail {
         this.state = state;
     }
 
-    public Long getOrdersuuid() {
-        return ordersuuid;
-    }
 
-    public void setOrdersuuid(Long ordersuuid) {
-        this.ordersuuid = ordersuuid;
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Orderdetail that = (Orderdetail) o;
-        return uuid == that.uuid &&
-                Objects.equals(goodsuuid, that.goodsuuid) &&
-                Objects.equals(goodsname, that.goodsname) &&
-                Objects.equals(price, that.price) &&
-                Objects.equals(num, that.num) &&
-                Objects.equals(money, that.money) &&
-                Objects.equals(endtime, that.endtime) &&
-                Objects.equals(ender, that.ender) &&
-                Objects.equals(storeuuid, that.storeuuid) &&
-                Objects.equals(state, that.state) &&
-                Objects.equals(ordersuuid, that.ordersuuid);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(uuid, goodsuuid, goodsname, price, num, money, endtime, ender, storeuuid, state, ordersuuid);
-    }
 }

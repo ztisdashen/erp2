@@ -63,7 +63,7 @@ public class EmpAction extends BaseAction<Emp> implements ModelDriven<Emp> {
     public String edit() {
         Emp byId = empBiz.findById(emp.getUuid());
         String jsonString = JSON.toJSONStringWithDateFormat(byId,"yyyy-MM-dd");
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 

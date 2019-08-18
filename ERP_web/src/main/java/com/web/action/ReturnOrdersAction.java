@@ -49,7 +49,7 @@ public class ReturnOrdersAction extends BaseAction<Returnorders> implements Mode
     public String edit() {
         Returnorders byId = returnorderBiz.findById(returnorders.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 }

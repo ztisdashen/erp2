@@ -48,7 +48,7 @@ public class GoodsAction extends BaseAction<Goods> implements ModelDriven<Goods>
     public String edit() {
         Goods byId = goodsBiz.findById(goods.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 

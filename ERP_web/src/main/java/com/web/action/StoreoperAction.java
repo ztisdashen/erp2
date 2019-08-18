@@ -44,7 +44,7 @@ public class StoreoperAction extends BaseAction<Storeoper> implements ModelDrive
     public String edit() {
         Storeoper byId = storeoperBiz.findById(storeoper.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 }

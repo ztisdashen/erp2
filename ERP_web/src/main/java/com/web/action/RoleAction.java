@@ -46,7 +46,7 @@ public class RoleAction extends BaseAction<Role> implements ModelDriven<Role> {
     public String edit() {
         Role byId = roleBiz.findById(role.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 }

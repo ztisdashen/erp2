@@ -44,7 +44,7 @@ public class StoreAction extends BaseAction<Store> implements ModelDriven<Store>
     public String edit() {
         Store byId = storeBiz.findById(store.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 }

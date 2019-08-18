@@ -47,7 +47,7 @@ public class GoodstypeAction extends BaseAction<Goodstype> implements ModelDrive
     public String edit() {
         Goodstype byId = goodstypeBiz.findById(goodstype.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 }

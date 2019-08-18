@@ -1,6 +1,7 @@
 package com.entity;
 
-import java.sql.Time;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -10,58 +11,73 @@ import java.util.Objects;
  * @create: 2019-07-18 17:50
  **/
 public class Orders {
-    private long uuid;
-    private Time createtime;
-    private Time checktime;
-    private Time starttime;
-    private Time endtime;
+    public static final String STATE_CREATE = "0";
+    public static final String STATE_CHECK = "1";
+    public static final String STATE_START = "2";
+    public static final String STATE_END = "3";
+    public static final String TYPE_IN = "1";
+    public static final String TYPE_OUT = "2";
+    private Long uuid;
+    private Date createtime;
+    private Date checktime;
+    private Date starttime;
+    private Date endtime;
     private String type;
     private Long creater;
     private Long checker;
     private Long starter;
     private Long ender;
     private Long supplieruuid;
-    private Long totalmoney;
+    private Double totalmoney;
     private String state;
     private Long waybillsn;
+    private List<Orderdetail> orderdetails;
 
-    public long getUuid() {
+    public List<Orderdetail> getOrderdetails() {
+        return orderdetails;
+    }
+
+    public void setOrderdetails(List<Orderdetail> orderdetails) {
+        this.orderdetails = orderdetails;
+    }
+
+    public Long getUuid() {
         return uuid;
     }
 
-    public void setUuid(long uuid) {
+    public void setUuid(Long uuid) {
         this.uuid = uuid;
     }
 
-    public Time getCreatetime() {
+    public Date getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Time createtime) {
+    public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
 
-    public Time getChecktime() {
+    public Date getChecktime() {
         return checktime;
     }
 
-    public void setChecktime(Time checktime) {
+    public void setChecktime(Date checktime) {
         this.checktime = checktime;
     }
 
-    public Time getStarttime() {
+    public Date getStarttime() {
         return starttime;
     }
 
-    public void setStarttime(Time starttime) {
+    public void setStarttime(Date starttime) {
         this.starttime = starttime;
     }
 
-    public Time getEndtime() {
+    public Date getEndtime() {
         return endtime;
     }
 
-    public void setEndtime(Time endtime) {
+    public void setEndtime(Date endtime) {
         this.endtime = endtime;
     }
 
@@ -113,11 +129,11 @@ public class Orders {
         this.supplieruuid = supplieruuid;
     }
 
-    public Long getTotalmoney() {
+    public Double getTotalmoney() {
         return totalmoney;
     }
 
-    public void setTotalmoney(Long totalmoney) {
+    public void setTotalmoney(Double totalmoney) {
         this.totalmoney = totalmoney;
     }
 

@@ -19,5 +19,5 @@ public interface IBaseBiz<T> {
     T findById(String uuid);
     void edit(T t);
 
-    List<T> findAll();
+    List<T> findAll(T t);
 }

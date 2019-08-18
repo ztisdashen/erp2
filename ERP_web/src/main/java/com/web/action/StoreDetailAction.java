@@ -46,7 +46,7 @@ public class StoreDetailAction extends BaseAction<Storedetail> implements ModelD
     public String edit() {
         Storedetail byId = StoredetailBiz.findById(Storedetail.getUuid());
         String jsonString = JSON.toJSONString(byId);
-        respone(jsonString);
+        response(jsonString);
         return NONE;
     }
 }
