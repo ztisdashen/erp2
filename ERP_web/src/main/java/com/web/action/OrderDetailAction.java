@@ -2,10 +2,15 @@ package com.web.action;
 
 import com.alibaba.fastjson.JSON;
 import com.biz.IOrderdetailBiz;
+import com.entity.Emp;
 import com.entity.Orderdetail;
 import com.entity.Orderdetail;
+import com.exception.ERPException;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+
+import javax.swing.plaf.basic.BasicTreeUI;
 
 /**
  * @program: erp2
@@ -38,6 +43,25 @@ public class OrderDetailAction extends BaseAction<Orderdetail> implements ModelD
 
     }
 
+
+    public String doInStore(){
+        Emp emp = (Emp) ActionContext.getContext().getSession().get("loginUser");
+        if(emp == null){
+            ajaxReturn(false,"还没登陆");
+            return NONE;
+        }
+        try{
+            orderdetailBiz.doInStore(orderdetail,emp.getUuid());
+            ajaxReturn(true,"入库成功");
+        }catch (ERPException e){
+            ajaxReturn(false,e.getMessage());
+        }catch (Exception e){
+            ajaxReturn(false,"入库失败");
+            e.printStackTrace();
+        }
+
+        return NONE;
+    }
     /**
      * 回显数据
      *

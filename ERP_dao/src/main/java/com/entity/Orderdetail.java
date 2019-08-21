@@ -2,7 +2,7 @@ package com.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-import java.sql.Time;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -20,7 +20,7 @@ public class Orderdetail {
     private Double price;
     private Long num;
     private Double money;
-    private Time endtime;
+    private Date endtime;
     private Long ender;
     private Long storeuuid;
     private String state;
@@ -83,11 +83,11 @@ public class Orderdetail {
         this.money = money;
     }
 
-    public Time getEndtime() {
+    public Date getEndtime() {
         return endtime;
     }
 
-    public void setEndtime(Time endtime) {
+    public void setEndtime(Date endtime) {
         this.endtime = endtime;
     }
 

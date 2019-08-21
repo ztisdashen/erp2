@@ -24,14 +24,59 @@ public class Orders {
     private Date endtime;
     private String type;
     private Long creater;
+    private String createrName;
     private Long checker;
+    private String checkerName;
     private Long starter;
+    private String starterName;
     private Long ender;
+    private String enderName;
     private Long supplieruuid;
+    private String supplierName;
     private Double totalmoney;
     private String state;
     private Long waybillsn;
     private List<Orderdetail> orderdetails;
+
+    public String getCreaterName() {
+        return createrName;
+    }
+
+    public void setCreaterName(String createrName) {
+        this.createrName = createrName;
+    }
+
+    public String getCheckerName() {
+        return checkerName;
+    }
+
+    public void setCheckerName(String checkerName) {
+        this.checkerName = checkerName;
+    }
+
+    public String getStarterName() {
+        return starterName;
+    }
+
+    public void setStarterName(String starterName) {
+        this.starterName = starterName;
+    }
+
+    public String getEnderName() {
+        return enderName;
+    }
+
+    public void setEnderName(String enderName) {
+        this.enderName = enderName;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
+    }
 
     public List<Orderdetail> getOrderdetails() {
         return orderdetails;
@@ -177,5 +222,31 @@ public class Orders {
     @Override
     public int hashCode() {
         return Objects.hash(uuid, createtime, checktime, starttime, endtime, type, creater, checker, starter, ender, supplieruuid, totalmoney, state, waybillsn);
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "uuid=" + uuid +
+                ", createtime=" + createtime +
+                ", checktime=" + checktime +
+                ", starttime=" + starttime +
+                ", endtime=" + endtime +
+                ", type='" + type + '\'' +
+                ", creater=" + creater +
+                ", createrName='" + createrName + '\'' +
+                ", checker=" + checker +
+                ", checkerName='" + checkerName + '\'' +
+                ", starter=" + starter +
+                ", starterName='" + starterName + '\'' +
+                ", ender=" + ender +
+                ", enderName='" + enderName + '\'' +
+                ", supplieruuid=" + supplieruuid +
+                ", supplierName='" + supplierName + '\'' +
+                ", totalmoney=" + totalmoney +
+                ", state='" + state + '\'' +
+                ", waybillsn=" + waybillsn +
+                ", orderdetails=" + orderdetails +
+                '}';
     }
 }

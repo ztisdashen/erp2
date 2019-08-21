@@ -6,6 +6,7 @@ import com.biz.IOrdersBiz;
 import com.entity.Emp;
 import com.entity.Orderdetail;
 import com.entity.Orders;
+import com.exception.ERPException;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -83,6 +84,44 @@ public class OrdersAction extends BaseAction<Orders> implements ModelDriven<Orde
         Orders byId = ordersBiz.findById(orders.getUuid());
         String jsonString = JSON.toJSONString(byId);
         response(jsonString);
+        return NONE;
+    }
+
+
+    public String doCheck(){
+        Emp emp = (Emp) ActionContext.getContext().getSession().get("loginUser");
+        if(emp == null){
+            ajaxReturn(false,"未登录");
+            return NONE;
+        }
+        try {
+            System.out.println(orders);
+            ordersBiz.doCheck(orders,emp.getUuid());
+            ajaxReturn(true,"审核成功");
+        }catch (ERPException e){
+            ajaxReturn(false,e.getMessage());
+        }catch (Exception e){
+            e.printStackTrace();
+            ajaxReturn(false,"审核失败");
+        }
+        return NONE;
+    }
+    public String doStart(){
+        Emp emp = (Emp) ActionContext.getContext().getSession().get("loginUser");
+        if(emp == null){
+            ajaxReturn(false,"未登录");
+            return NONE;
+        }
+        try {
+            System.out.println(orders);
+            ordersBiz.doStart(orders,emp.getUuid());
+            ajaxReturn(true,"确认成功");
+        }catch (ERPException e){
+            ajaxReturn(false,e.getMessage());
+        }catch (Exception e){
+            e.printStackTrace();
+            ajaxReturn(false,"确认失败");
+        }
         return NONE;
     }
 }

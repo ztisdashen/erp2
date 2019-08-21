@@ -27,7 +27,7 @@ http://www.springframework.org/schema/context
         <property name="baseDao" ref="storedetailDao"/>
     </bean>
     <bean class="com.biz.impl.StoreBizImpl" id="storeBiz">
-        <property name="baseDao" ref="storeDao"/>
+        <property name="storeDao" ref="storeDao"/>
     </bean>
 
     <bean class="com.biz.impl.RoleMenuBizImpl" id="roleMenuBiz">
@@ -48,10 +48,14 @@ http://www.springframework.org/schema/context
 
     <bean class="com.biz.impl.OrdersBizImpl" id="ordersBiz">
         <property name="ordersDao" ref="ordersDao"/>
+        <property name="empDao" ref="empDao"/>
+        <property name="supplierDao" ref="supplierDao"/>
     </bean>
 
     <bean class="com.biz.impl.OrderdetailBizImpl" id="orderdetailBiz">
-        <property name="baseDao" ref="orderdetailDao"/>
+        <property name="orderdetailDao" ref="orderdetailDao"/>
+        <property name="storedetailDao" ref="storedetailDao"/>
+        <property name="storeoperDao" ref="storeoperDao"/>
     </bean>
 
     <bean class="com.biz.impl.MenuBizImpl" id="menuBiz">

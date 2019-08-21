@@ -19,6 +19,7 @@ http://www.springframework.org/schema/context
     </bean>
     <tx:advice transaction-manager="txManager" id="advice">
         <tx:attributes>
+            <tx:method name="do*"/>
             <tx:method name="add*"/>
             <tx:method name="update*"/>
             <tx:method name="delete*"/>

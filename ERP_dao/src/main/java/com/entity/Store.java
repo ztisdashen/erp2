@@ -9,15 +9,15 @@ import java.util.Objects;
  * @create: 2019-07-18 17:50
  **/
 public class Store {
-    private long uuid;
+    private Long uuid;
     private String name;
     private Long empuuid;
 
-    public long getUuid() {
+    public Long getUuid() {
         return uuid;
     }
 
-    public void setUuid(long uuid) {
+    public void setUuid(Long uuid) {
         this.uuid = uuid;
     }
 

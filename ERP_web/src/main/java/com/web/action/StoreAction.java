@@ -2,8 +2,10 @@ package com.web.action;
 
 import com.alibaba.fastjson.JSON;
 import com.biz.IStoreBiz;
+import com.entity.Emp;
 import com.entity.Store;
 import com.entity.Store;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -16,12 +18,28 @@ import com.opensymphony.xwork2.ModelDriven;
 public class StoreAction extends BaseAction<Store> implements ModelDriven<Store> {
     private Store store = new Store();
     @Override
-    public Store getModel() {
+    public Store getModel()
+    {
+        super.setT(store);
         return store;
     }
     private IStoreBiz storeBiz;
 
+    @Override
+    public String listAll() {
+        Emp emp = (Emp) ActionContext.getContext().getSession().get("loginUser");
+        if(emp == null){
+            response(null);
+            return NONE;
+        }
+
+
+        store.setEmpuuid(emp.getUuid());
+        return super.listAll();
+    }
+
     public void setStoreBiz(IStoreBiz storeBiz) {
+        super.setBaseBiz(storeBiz);
         this.storeBiz = storeBiz;
     }
     public String delete() {

@@ -16,27 +16,12 @@
          */
         function login(){
             var formdata = $('#loginform').serializeJSON();
-            //提交登陆验证
-            // $.ajax({
-            //     url: 'login_checkUser.action',
-            //     data:formdata,
-            //     dataType: 'json',
-            //     type: 'post',
-            //     success:function(rtn){
-            //         //登陆成功
-            //         if(rtn.success){
-            //             location.href="index.html";
-            //         }else{
-            //             $.messager.alert('提示',rtn.message,'info');
-            //         }
-            //     }
-            // });
             $.post("login_checkUser.action",formdata,function (data) {
                 //登陆成功
                 if(data.success){
                     location.href="index.html";
                 }else{
-                    $.messager.alert('提示',data.message,'info');
+                    $.messager.alert('提示',data.msg,'info');
                 }
             },'json');
         }

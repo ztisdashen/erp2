@@ -8,251 +8,85 @@
     <script type="text/javascript" src="./js/jquery-3.4.0.js"></script>
     <script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/table.css">
     <script type="text/javascript" src="./locale/easyui-lang-zh_CN.js"></script>
     <script type="text/javascript" src="js/jquery.serializejson.js"></script>
-    <script type="text/javascript" src="js/crud.js"></script>
+    <script type="text/javascript" src="js/request.js"></script>
     <script type="text/javascript" src="js/date.js"></script>
-    <script type="text/javascript">
-        var actionName = "orders";
-        var columns =  [[
-            {field: 'uuid', title: '编号', width: 50},
-            {field: 'createtime', title: '生成日期', width: 150,formatter:function (value) {
-                    return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
-                }},
-            {field: 'checktime', title: '审核日期', width: 150,formatter:function (value) {
-                    return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
-                }},
-            {field: 'starttime', title: '确认日期', width: 150,formatter:function (value) {
-                    return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
-                }},
-            {field: 'endtime', title: '入库或出库日期', width: 150,formatter:function (value) {
-                    return new Date(value).Format("yyyy-MM-dd hh:mm:ss");
-                }},
-            {field: 'type', title: '1：采购 2：销售', width: 120},
-            {field: 'creater', title: '下单员', width: 50},
-            {field: 'checker', title: '审核员', width: 50},
-            {field: 'starter', title: '采购员', width: 50},
-            {field: 'ender', title: '库管员', width: 50},
-            {field: 'supplieruuid', title: '供应商', width: 50},
-            {field: 'totalmoney', title: '总价', width: 50},
-            {field: 'state', title: '状态', width: 50},
-            {field: 'waybillsn', title: '电话', width: 50},
-            {field:'ssss',title:'操作',formatter:function (value,row,index) {
-                    var del = '<a href="javascript:void(0)" class="menuA" onclick="del('+row.uuid+')">删除</a>|';
-                    var edit='<a href="javascript:void(0)" onclick="edit('+row.uuid+')" class="menuA">修改</a>';
-                    return del+edit;
-                }}
-        ]];
-    </script>
+    <script type="text/javascript" src="js/orders.js"></script>
+
 </head>
 <body class="font">
-<div class="easyui-panel" style="padding-left: 4px;border-bottom: none">
-    <form id="searchForm">
-        <table >
-            <tr>
-                <td>
-                    部门名称：<input class="put22 easyui-textbox"  style="width:150px"
-                                name="name"> &nbsp;&nbsp;&nbsp;
-                    部门电话：<input class="put22 easyui-textbox"  style="width:150px"
-                                name="tele">&nbsp;&nbsp;&nbsp;
-                    <a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a></td>
-            </tr>
-        </table>
-    </form>
-</div>
 <table id="dg" style="width: 100%">
 
 </table>
 
-<!-- 添加客户的表单，默认是隐藏的 -->
-<div id="winSave" class="easyui-window" title="添加部门" style="width:400px;height:450px"
-     data-options="iconCls:'icon-save',modal:true,closed:true">
-    <div class="easyui-layout" data-options="fit:true">
-        <div data-options="region:'center'" style="padding:10px;border-bottom: none">
-            <form id="formSave" method="post">
-                <TABLE cellSpacing=0 cellPadding=5  border=0>
-                    <TR>
-                        <td>生成日期：</td>
-                        <td>
-                            <INPUT type="hidden" name="uuid">
-                            <INPUT class="textbox easyui-datebox" editable="false" style="WIDTH: 150px" maxLength=50 name="createtime">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>审核日期：</td>
-                        <td>
-                            <INPUT class="textbox easyui-datebox" editable="false" style="WIDTH: 150px" maxLength=50 name="checktime">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>确认日期：</td>
-                        <td>
-                            <INPUT class="textbox easyui-datebox" editable="false" style="WIDTH: 150px" maxLength=50 name="starttime">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>入库或出库日期：</td>
-                        <td>
-                            <INPUT class="textbox easyui-datebox" editable="false" style="WIDTH: 150px" maxLength=50 name="endtime">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>1：采购 2：销售：</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="type">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>下单员</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="creater">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>审核员</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="checker">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>采购员</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="starter">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>库管员</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="ender">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>供应商</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="supplieruuid">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>总价</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="totalmoney">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>状态</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="state">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>电话</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="waybillsn">
-                        </td>
-                    </TR>
+<div id="ordersDlg" class="easyui-dialog" title="My Dialog" style="width:700px;height:300px;"
+     data-options="resizable:true,modal:true,title:'订单详情',closed:true">
+    <form id="orders">
+        <table class="hovertable" style="padding: 5px;font-size: 10px;">
+            <tr>
+                <td class="bg" >流水号</td>
+                <td id="uuid">
+                </td>
+                <td class="bg">供应商</td>
+                <td colspan="3" id="supplierName">
+                </td>
+                <td class="bg">状态</td>
+                <td id="state"></td>
+            </tr>
+            <tr>
+                <td class="bg" style="width: 10%">下单员</td>
+                <td style="width: 15%" id="createrName"></td>
+                <td class="bg" style="width: 10%">审核员</td>
+                <td style="width: 15%" id="checkerName"></td>
+                <td class="bg" style="width: 10%">采购员</td>
+                <td style="width: 15%" id="starterName"></td>
+                <td class="bg" style="width: 10%">库管员</td>
+                <td style="width: 15%" id="enderName"></td>
+            </tr>
+            <tr>
+                <td class="bg noBorderBottom" style="width: 10%">下单日期</td>
+                <td style="width: 15%" id="createtime"></td>
+                <td class="bg noBorderBottom" style="width: 10%">审核日期</td>
+                <td style="width: 15%" id="checktime"></td>
+                <td class="bg noBorderBottom" style="width: 10%">采购日期</td>
+                <td style="width: 15%" id="starttime"></td>
+                <td class="bg noBorderBottom" style="width: 10%">库管日期</td>
+                <td style="width: 15%" id="endtime"></td>
+            </tr>
+        </table>
 
-                </TABLE>
-            </form>
-        </div>
-        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
-            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="edit2('Save','save')" style="width:80px">保存</a>
-        </div>
-    </div>
+    </form>
+
+    <table id="itemDetail" style="width: 100%"></table>
 </div>
-<div id="winEdit" class="easyui-window" title="修改部门" style="width:400px;height:450px"
-     data-options="iconCls:'icon-save',modal:true,closed:true">
-    <div class="easyui-layout" data-options="fit:true">
-        <div data-options="region:'center'" style="padding:10px;border-bottom: none">
-            <form id="formEdit" method="post">
-                <TABLE cellSpacing=0 cellPadding=5  border=0>
-                    <TR>
-                        <td>生成日期：</td>
-                        <td>
-                            <INPUT type="hidden" name="uuid">
-                            <INPUT class="textbox easyui-datebox" editable="false" style="WIDTH: 150px" maxLength=50 name="createtime">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>审核日期：</td>
-                        <td>
-                            <INPUT class="textbox easyui-datebox" editable="false" style="WIDTH: 150px" maxLength=50 name="checktime">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>确认日期：</td>
-                        <td>
-                            <INPUT class="textbox easyui-datebox" editable="false" style="WIDTH: 150px" maxLength=50 name="starttime">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>入库或出库日期：</td>
-                        <td>
-                            <INPUT class="textbox easyui-datebox" editable="false" style="WIDTH: 150px" maxLength=50 name="endtime">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>1：采购 2：销售：</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="type">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>下单员</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="creater">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>审核员</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="checker">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>采购员</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="starter">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>库管员</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="ender">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>供应商</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="supplieruuid">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>总价</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="totalmoney">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>状态</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="state">
-                        </td>
-                    </TR>
-                    <tr>
-                        <td>电话</td>
-                        <td>
-                            <INPUT class="textbox"  style="WIDTH: 150px" maxLength=50 name="waybillsn">
-                        </td>
-                    </TR>
 
-
-                </TABLE>
-            </form>
-        </div>
-        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
-            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="edit2('Edit','editFinal')" style="width:80px">修改</a>
-        </div>
-    </div>
+<div id="itemDlg" class="easyui-dialog">
+    <form id="orderDetail">
+        <input type="hidden" name="uuid" id="orderUUID">
+        <table class="hovertable">
+            <tr>
+                <td class="bg">商品编号：</td>
+                <td id="goodsuuid"></td>
+            </tr>
+            <tr>
+                <td class="bg">商品名称：</td>
+                <td id="goodsname"></td>
+            </tr>
+            <tr>
+                <td class="bg">商品数量：</td>
+                <td id="goodsnum"></td>
+            </tr>
+            <tr>
+                <td class="bg">仓库：</td>
+                <td >
+                    <input id="cc" class="easyui-combobox" name="storeuuid"
+                           data-options="valueField:'uuid',textField:'name',url:'store_listAll.action'">
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 </body>
 </html>

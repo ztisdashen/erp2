@@ -1,6 +1,6 @@
 package com.entity;
 
-import java.sql.Time;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -10,9 +10,11 @@ import java.util.Objects;
  * @create: 2019-07-18 17:50
  **/
 public class Storeoper {
+    public static final String TYPE_IN = "1";
+    public static final String TYPE_NOT_IN = "2";
     private long uuid;
     private Long empuuid;
-    private Time opertime;
+    private Date opertime;
     private Long storeuuid;
     private Long goodsuuid;
     private Long num;
@@ -34,11 +36,11 @@ public class Storeoper {
         this.empuuid = empuuid;
     }
 
-    public Time getOpertime() {
+    public Date getOpertime() {
         return opertime;
     }
 
-    public void setOpertime(Time opertime) {
+    public void setOpertime(Date opertime) {
         this.opertime = opertime;
     }
 
